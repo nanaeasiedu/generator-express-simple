@@ -24,13 +24,17 @@ module.exports = function(grunt) {
         trailing: true,
         smarttabs: true,
         white: true
+        globals: {
+          jQuery: true,
+          browser: true
+        }
       },
       all: ['routes/**/*.js', 'public/**/*.js', 'app.js', 'Grunfile.js']
     },
     uglify: {
       options: {
         mangle: {
-          except: []
+          except: ['jQuery', '$']
         },
         banner: '<%= banner %>'
       },
