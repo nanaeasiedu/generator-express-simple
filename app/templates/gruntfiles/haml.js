@@ -38,16 +38,6 @@ module.exports = function(grunt) {
         files: {}
       }
     },
-    less: {
-      development: {
-        options: {
-          path: ['./public/css']
-        },
-        files: {
-          './public/css/style.css': './less/style.less'
-        }
-      }
-    },
     cssmin: {
       compress: {
         options: {
@@ -67,13 +57,6 @@ module.exports = function(grunt) {
         },
         tasks: ['jshint', 'uglify']
       },
-      less: {
-        files: ['!node_modules', './public/**/*.less'],
-        options: {
-          events: ['all']
-        },
-        tasks: ['less', 'cssmin']
-      },
       css: {
         files: ['!node_modules', './public/**/*.css'],
         options: {
@@ -82,8 +65,8 @@ module.exports = function(grunt) {
         },
         tasks: ['cssmin']
       },
-      jade: {
-        files: ['!node_modules', './views/**/*.jade'],
+      haml: {
+        files: ['!node_modules', './views/**/*.haml'],
         options: {
           events: ['all'],
           livereload: 3355
@@ -93,9 +76,8 @@ module.exports = function(grunt) {
   });
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint', 'uglify', 'less', 'cssmin', 'watch']);
+  grunt.registerTask('default', ['jshint', 'uglify', 'cssmin', 'watch']);
 };

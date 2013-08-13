@@ -68,7 +68,7 @@ module.exports = function(grunt) {
         tasks: ['jshint', 'uglify']
       },
       less: {
-        files: ['!node_modules', './public/**/*.less'],
+        files: ['!node_modules', './**/*.less'],
         options: {
           events: ['all']
         },
@@ -82,8 +82,8 @@ module.exports = function(grunt) {
         },
         tasks: ['cssmin']
       },
-      jade: {
-        files: ['!node_modules', './views/**/*.jade'],
+      html: {
+        files: ['!node_modules', './views/**/*.html'],
         options: {
           events: ['all'],
           livereload: 3355

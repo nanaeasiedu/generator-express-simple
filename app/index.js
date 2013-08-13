@@ -13,7 +13,7 @@ var ExpressSimpleGenerator = module.exports = function ExpressSimpleGenerator(ar
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
-  this.userJSON = JSON.parse(this.readFileAsString(path.join(__dirname, 'templates/express/jsonsData/package.json')));
+  this.packageJSON = JSON.parse(this.readFileAsString(path.join(__dirname, 'templates/express/jsonsData/package.json')));
 };
 
 util.inherits(ExpressSimpleGenerator, yeoman.generators.Base);
@@ -52,7 +52,7 @@ ExpressSimpleGenerator.prototype.askFor = function askFor() {
     type: 'list',
     name: 'css_engine',
     message: 'please select your css engine',
-    choices: ['sass', 'scss', 'less'],
+    choices: ['scss', 'less'],
     default: 'less',
     when: function(answers) {
       if (Boolean(answers.css_engine_confirm)) {
@@ -72,6 +72,9 @@ ExpressSimpleGenerator.prototype.askFor = function askFor() {
   }.bind(this));
 };
 
+ExpressSimpleGenerator.prototype.bowerWriter = function bowerWriter() {
+  this.copy('_bower.json', 'bower.json');
+};
 
 ExpressSimpleGenerator.prototype.jqueryWriter = function jqueryWriter() {
   var cb = this.async();
@@ -98,16 +101,20 @@ ExpressSimpleGenerator.prototype.normalizeWriter = function normalizeWriter() {
 ExpressSimpleGenerator.prototype.jsonWriter = function jsonWriter() {
   this.cssEngineHash = {
     less: ['grunt-contrib-less', '~0.6.4'],
-    scss: ['grunt-scss', '*'],
-    sass: ['grunt-contrib-sass', '*']
+    scss: ['grunt-sass', '*'],
   };
   var packageJSON = this.packageJSON;
   if (this.html_engine_confirm) {
-    packageJSON.devDependencies[this.html_engine] = '*';
+    if (this.html_engine === 'haml') {
+      packageJSON.dependencies[this.html_engine + 'js'] = '*';
+    } else {
+      packageJSON.dependencies[this.html_engine] = '*';
+    }
   }
   if (this.css_engine_confirm) {
-    packageJSON.devDependencies[cssEngineHash[this.html_engine][0]] = cssEngineHash[this.html_engine][1]
+    packageJSON.devDependencies[this.cssEngineHash[this.css_engine][0]] = this.cssEngineHash[this.css_engine][1]
   }
+  this.write('package.json', JSON.stringify(packageJSON, null, 2))
 };
 
 ExpressSimpleGenerator.prototype.gruntFileWriter = function gruntFileWriter() {
@@ -115,19 +122,19 @@ ExpressSimpleGenerator.prototype.gruntFileWriter = function gruntFileWriter() {
   var htmlConfirm = this.html_engine_confirm;
 
   if (this.jquery && this.html_engine_confirm && this.css_engine_confirm) {
-    this.template('gruntfiles/jq' + this.html_engine + this.css_engine + '.js');
+    this.copy('gruntfiles/jq' + this.html_engine + this.css_engine + '.js', 'Gruntfile.js');
   } else if (this.jquery && this.html_engine_confirm) {
-    this.template('gruntfiles/jq' + this.html_engine + '.js');
+    this.copy('gruntfiles/jq' + this.html_engine + '.js', 'Gruntfile.js');
   } else if (this.jquery && this.css_engine_confirm) {
-    this.template('gruntfiles/jq' + this.css_engine + '.js');
+    this.copy('gruntfiles/jq' + this.css_engine + '.js', 'Gruntfile.js');
   } else if (this.html_engine_confirm && this.css_engine_confirm) {
-    this.template('gruntfiles/' + this.html_engine + this.css_engine + '.js')
+    this.copy('gruntfiles/' + this.html_engine + this.css_engine + '.js', 'Gruntfile.js');
   } else if (this.html_engine_confirm) {
-    this.template('gruntfiles/' + this.html_engine + '.js');
+    this.copy('gruntfiles/' + this.html_engine + '.js', 'Gruntfile.js');
   } else if (this.css_engine_confirm) {
-    this.templates('gruntfiles/' + this.css_engine + '.js');
+    this.copy('gruntfiles/' + this.css_engine + '.js', 'Gruntfile.js');
   } else {
-    this.template('gruntfiles/default.json');
+    this.copy('gruntfiles/default.js', 'Gruntfile.js');
   }
 };
 
@@ -138,20 +145,40 @@ ExpressSimpleGenerator.prototype.expressFilesWriter = function expressFilesWrite
   this.mkdir('public/js');
   this.mkdir('routes');
   this.mkdir('views');
-  this.template('express/public/stylesheets/style.css', 'public/css/style.css');
-  this.template('express/routes/index.js', 'routes/index.js');
-  this.template('express/routes/user.js', 'routes/user.js');
-  this.template('express/app.js', 'app.js');
-  this.template('express/views/layout.jade', 'views/layout.jade');
+  this.copy('express/public/stylesheets/style.css', 'public/css/style.css');
+  if (this.html_engine_confirm) {
+    this.copy('express/routes' + this.html_engine + '/index.js', 'routes/index.js');
+    this.copy('express/routes' + this.html_engine + '/user.js', 'routes/user.js');
+  }
+  if (this.html_engine_confirm) {
+    this.copy('express/apps/app' + this.html_engine + '.js', 'app.js');
+  }
   if (this.css_engine_confirm) {
     this.mkdir(this.css_engine);
-    this.template('express/' + this.css_engine + '/style.less', this.css_engine + '/style.' + this.css_engine);
+    this.copy('express/styles/style.' + this.css_engine, this.css_engine + '/style.' + this.css_engine);
   }
 
-  if (this.jquery) {
-    this.template('express/views/indexjquery.jade', 'views/index.jade');
-    this.template('jquery/jquery.min.js', 'public/js/jquery.min.js');
-  } else {
-    this.template('express/views/index.jade', 'views/index.jade');
+  if (this.jquery && this.html_engine_confirm) {
+    if (this.html_engine === 'jade') {
+      this.copy('express/views/jqindex.jade', 'views/index.jade');
+      this.copy('express/views/layout.jade', 'views/layout.jade');
+    } else if (this.html_engine === 'underscore') {
+      this.copy('express/views/jq' + this.html_engine + '.html', 'views/index.html');
+    } else {
+      this.copy('express/views/jq' + this.html_engine + '.' + this.html_engine, 'views/index.haml');
+    }
+    this.copy('jquery/jquery.min.js', 'public/js/jquery.min.js');
+  } else if (this.jquery) {
+    this.copy('jquery/jquery.min.js', 'public/js/jquery.min.js');
+  } else if (this.html_engine_confirm) {
+    if (this.html_engine === 'jade') {
+      this.copy('express/views/index.jade', 'views/index.jade');
+      this.copy('express/views/layout.jade', 'views/layout.jade');
+    } else if (this.html_engine === 'underscore') {
+      this.copy('express/views/index.html', 'views/index.html');
+    } else {
+      this.copy('express/views/index.' + this.html_engine, 'views/index.haml');
+    }
+    this.copy('jquery/jquery.min.js', 'public/js/jquery.min.js');
   }
 };

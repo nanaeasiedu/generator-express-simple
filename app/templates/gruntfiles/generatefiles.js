@@ -6,7 +6,7 @@ var fs = require('fs');
 var path = require('path');
 var pre = 'jq';
 var post = '.js';
-var cssEngines = ['less', 'sass', 'scss'];
+var cssEngines = ['less', 'scss'];
 var htmlEngines = ['jade', 'haml', 'underscore'];
 var i = 0;
 var j = 0;
@@ -21,8 +21,12 @@ for (i; i < htmlEnginesLength; i++) {
   for (j; j < cssEnginesLength; j++) {
     allFile = fs.createWriteStream(path.join(__dirname, (pre + htmlEngines[i] + cssEngines[j] + post)));
     allFile.write(defaultFile);
+    allFile = fs.createWriteStream(path.join(__dirname, (htmlEngines[i] + cssEngines[j] + post)));
+    allFile.write(defaultFile);
   }
-  cssFile = fs.createWriteStream(path.join(__dirname, cssEngines[i] + post));
+  if (i < 2) {
+    cssFile = fs.createWriteStream(path.join(__dirname, cssEngines[i] + post));
+  }
   htmlFile = fs.createWriteStream(path.join(__dirname, htmlEngines[i] + post));
   cssFile.write(defaultFile);
   htmlFile.write(defaultFile);

@@ -23,38 +23,24 @@ module.exports = function(grunt) {
         strict: true,
         trailing: true,
         smarttabs: true,
-        white: true
+        white: true,
+        globals: {
+          jquery: true,
+          browser: true
+        }
       },
       all: ['routes/**/*.js', 'public/**/*.js', 'app.js', 'Grunfile.js']
     },
     uglify: {
       options: {
         mangle: {
-          except: []
+          except: ['jQuery', '$']
         },
         banner: '<%= banner %>'
       },
       my_target: {
         files: {}
       }
-    },
-    sass: { // Task
-      dist: { // Target
-        files: { // Dictionary of files
-          './public/css/style.css': './scss/style.scss' // 'destination': 'source'
-        }
-      }
-      /*,
-        dev: {                              // Another target
-            options: {                      // Dictionary of render options
-                includePaths: [
-                    'path/to/imports/'
-                ]
-            },
-            files: {
-                'main.css': 'main.scss'
-            }
-        }*/
     },
     cssmin: {
       compress: {
@@ -75,13 +61,6 @@ module.exports = function(grunt) {
         },
         tasks: ['jshint', 'uglify']
       },
-      sass: {
-        files: ['!node_modules', './**/*.scss'],
-        options: {
-          events: ['all']
-        },
-        tasks: ['sass', 'cssmin']
-      },
       css: {
         files: ['!node_modules', './public/**/*.css'],
         options: {
@@ -90,13 +69,19 @@ module.exports = function(grunt) {
         },
         tasks: ['cssmin']
       },
+      jade: {
+        files: ['!node_modules', './views/**/*.jade'],
+        options: {
+          events: ['all'],
+          livereload: 3355
+        },
+      }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint', 'uglify', 'sass', 'cssmin', 'watch']);
+  grunt.registerTask('default', ['jshint', 'uglify', 'cssmin', 'watch']);
 };

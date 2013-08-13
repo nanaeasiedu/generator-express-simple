@@ -1,36 +1,41 @@
 module.exports = function(grunt) {
   grunt.initConfig({
-    pkg: grunt.file.readJSON('./package.json'),
-    banner: '/* <%= pkg.name %> <%= pkg.version %> \n' + '* By <%= pkg.author %> \n' + '* Distributed under <%= pkg.license %> \n' + '* Copyrights <%= grunt.template.today("yyyy") %> . All Rights Reserved */\n',
-    jshint: {
-      options: {
-        ignores: ['./node_modules'],
-        node: true,
-        esnext: true,
-        bitwise: true,
-        camelcase: true,
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        indent: 2,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        quotmark: "single",
-        regexp: true,
-        undef: true,
-        unused: true,
-        strict: true,
-        trailing: true,
-        smarttabs: true,
-        white: true
+      pkg: grunt.file.readJSON('./package.json'),
+      banner: '/* <%= pkg.name %> <%= pkg.version %> \n' + '* By <%= pkg.author %> \n' + '* Distributed under <%= pkg.license %> \n' + '* Copyrights <%= grunt.template.today("yyyy") %> . All Rights Reserved */\n',
+      jshint: {
+        options: {
+          ignores: ['./node_modules'],
+          node: true,
+          esnext: true,
+          bitwise: true,
+          camelcase: true,
+          curly: true,
+          eqeqeq: true,
+          immed: true,
+          indent: 2,
+          latedef: true,
+          newcap: true,
+          noarg: true,
+          quotmark: "single",
+          regexp: true,
+          undef: true,
+          unused: true,
+          strict: true,
+          trailing: true,
+          smarttabs: true,
+          white: true
+        },
+        globals: {
+          jquery: true,
+          browser: true
+        }
       },
       all: ['routes/**/*.js', 'public/**/*.js', 'app.js', 'Grunfile.js']
     },
     uglify: {
       options: {
         mangle: {
-          except: []
+          except: ['jQuery', '$']
         },
         banner: '<%= banner %>'
       },
@@ -38,15 +43,23 @@ module.exports = function(grunt) {
         files: {}
       }
     },
-    less: {
-      development: {
-        options: {
-          path: ['./public/css']
-        },
-        files: {
-          './public/css/style.css': './less/style.less'
+    sass: { // Task
+      dist: { // Target
+        files: { // Dictionary of files
+          './public/css/style.css': './scss/style.scss' // 'destination': 'source'
         }
       }
+      /*,
+        dev: {                              // Another target
+            options: {                      // Dictionary of render options
+                includePaths: [
+                    'path/to/imports/'
+                ]
+            },
+            files: {
+                'main.css': 'main.scss'
+            }
+        }*/
     },
     cssmin: {
       compress: {
@@ -67,12 +80,12 @@ module.exports = function(grunt) {
         },
         tasks: ['jshint', 'uglify']
       },
-      less: {
-        files: ['!node_modules', './public/**/*.less'],
+      sass: {
+        files: ['!node_modules', './**/*.scss'],
         options: {
           events: ['all']
         },
-        tasks: ['less', 'cssmin']
+        tasks: ['sass', 'cssmin']
       },
       css: {
         files: ['!node_modules', './public/**/*.css'],
@@ -91,11 +104,11 @@ module.exports = function(grunt) {
       }
     }
   });
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-contrib-jshint');
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-sass');
+grunt.loadNpmTasks('grunt-contrib-cssmin');
+grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint', 'uglify', 'less', 'cssmin', 'watch']);
+grunt.registerTask('default', ['jshint', 'uglify', 'sass', 'cssmin', 'watch']);
 };

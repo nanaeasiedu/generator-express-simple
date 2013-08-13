@@ -23,14 +23,18 @@ module.exports = function(grunt) {
         strict: true,
         trailing: true,
         smarttabs: true,
-        white: true
+        white: true,
+        globals: {
+          jquery: true,
+          browser: true
+        }
       },
       all: ['routes/**/*.js', 'public/**/*.js', 'app.js', 'Grunfile.js']
     },
     uglify: {
       options: {
         mangle: {
-          except: []
+          except: ['jQuery', '$']
         },
         banner: '<%= banner %>'
       },
@@ -68,7 +72,7 @@ module.exports = function(grunt) {
         tasks: ['jshint', 'uglify']
       },
       less: {
-        files: ['!node_modules', './public/**/*.less'],
+        files: ['!node_modules', './**/*.less'],
         options: {
           events: ['all']
         },
@@ -82,8 +86,8 @@ module.exports = function(grunt) {
         },
         tasks: ['cssmin']
       },
-      jade: {
-        files: ['!node_modules', './views/**/*.jade'],
+      haml: {
+        files: ['!node_modules', './views/**/*.haml'],
         options: {
           events: ['all'],
           livereload: 3355

@@ -41,21 +41,21 @@ module.exports = function(grunt) {
     sass: { // Task
       dist: { // Target
         files: { // Dictionary of files
-          './public/css/style.css': './scss/style.scss' // 'destination': 'source'
+          './public/style.css': './scss/style.scss' // 'destination': 'source'
         }
       }
       /*,
-        dev: {                              // Another target
-            options: {                      // Dictionary of render options
-                includePaths: [
-                    'path/to/imports/'
-                ]
-            },
-            files: {
-                'main.css': 'main.scss'
-            }
-        }*/
-    },
+      dev: { // Another target
+        options: { // Dictionary of render options
+          includePaths: [
+            'path/to/imports/'
+          ]
+        },
+        files: {
+          './public/style.css': './scss/style.scss'
+        }
+      }*/
+    }
     cssmin: {
       compress: {
         options: {
@@ -90,11 +90,18 @@ module.exports = function(grunt) {
         },
         tasks: ['cssmin']
       },
+      jade: {
+        files: ['!node_modules', './views/**/*.jade'],
+        options: {
+          events: ['all'],
+          livereload: 3355
+        },
+      }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
