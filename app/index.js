@@ -28,7 +28,7 @@ ExpressSimpleGenerator.prototype.askFor = function askFor() {
   }, {
     type: 'confirm',
     name: 'html_engine_confirm',
-    message: 'do you want any html engine to be installed?',
+    message: 'Do you want any html engine to be installed?',
     default: true
   }, {
     type: 'list',
@@ -46,7 +46,7 @@ ExpressSimpleGenerator.prototype.askFor = function askFor() {
   }, {
     type: 'confirm',
     name: 'css_engine_confirm',
-    message: 'do you want an css engine to be installed',
+    message: 'do you want any css engine to be installed',
     default: true
   }, {
     type: 'list',

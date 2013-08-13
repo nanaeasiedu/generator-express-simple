@@ -1,6 +1,6 @@
 {
   "name": "generator-express-simple",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "An express generator for Yeoman",
   "keywords": [
     "yeoman-generator",
@@ -14,7 +14,7 @@
   "bugs": "https://github.com/ngenerio/generator-express-simple/issues",
   "author": {
     "name": "Eugene Asiedu",
-    "email": "",
+    "email": "ngene84@gmail.com",
     "url": "https://github.com/ngenerio"
   },
   "main": "app/index.js",
