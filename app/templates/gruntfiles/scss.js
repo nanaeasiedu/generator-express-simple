@@ -5,25 +5,13 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         ignores: ['./node_modules'],
-        node: true,
-        esnext: true,
-        bitwise: true,
-        camelcase: true,
-        curly: true,
         eqeqeq: true,
-        immed: true,
-        indent: 2,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        quotmark: "single",
-        regexp: true,
-        undef: true,
-        unused: true,
-        strict: true,
-        trailing: true,
-        smarttabs: true,
-        white: true
+        curly: true,
+        debug: true,
+        eqnull: true,
+        multistr: true,
+        asi: false,
+        quotmark: true
       },
       all: ['routes/**/*.js', 'public/**/*.js', 'app.js', 'Grunfile.js']
     },

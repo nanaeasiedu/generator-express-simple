@@ -4,26 +4,15 @@ module.exports = function(grunt) {
     banner: '/* <%= pkg.name %> <%= pkg.version %> \n' + '* By <%= pkg.author %> \n' + '* Distributed under <%= pkg.license %> \n' + '* Copyrights <%= grunt.template.today("yyyy") %> . All Rights Reserved */\n',
     jshint: {
       options: {
-        ignores: ['./node_modules'],
+        ignores: ['./node_modules', './public/js/jquery.min.js', 'bower_components'],
         node: true,
-        esnext: true,
-        bitwise: true,
-        camelcase: true,
-        curly: true,
         eqeqeq: true,
-        immed: true,
-        indent: 2,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        quotmark: "single",
-        regexp: true,
-        undef: true,
-        unused: true,
-        strict: true,
-        trailing: true,
-        smarttabs: true,
-        white: true
+        curly: true,
+        debug: true,
+        eqnull: true,
+        multistr: true,
+        asi: false,
+        quotmark: true,
         globals: {
           jquery: true,
           browser: true

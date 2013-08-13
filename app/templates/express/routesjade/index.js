@@ -8,4 +8,4 @@ exports.index = function(app) {
       title: 'Express'
     });
   });
-}
+};
