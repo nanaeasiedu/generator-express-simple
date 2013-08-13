@@ -1,30 +1,29 @@
 module.exports = function(grunt) {
   grunt.initConfig({
-      pkg: grunt.file.readJSON('./package.json'),
-      banner: '/* <%= pkg.name %> <%= pkg.version %> \n' + '* By <%= pkg.author %> \n' + '* Distributed under <%= pkg.license %> \n' + '* Copyrights <%= grunt.template.today("yyyy") %> . All Rights Reserved */\n',
-      jshint: {
-        options: {
-          ignores: ['./node_modules'],
-          node: true,
-          esnext: true,
-          bitwise: true,
-          camelcase: true,
-          curly: true,
-          eqeqeq: true,
-          immed: true,
-          indent: 2,
-          latedef: true,
-          newcap: true,
-          noarg: true,
-          quotmark: "single",
-          regexp: true,
-          undef: true,
-          unused: true,
-          strict: true,
-          trailing: true,
-          smarttabs: true,
-          white: true
-        },
+    pkg: grunt.file.readJSON('./package.json'),
+    banner: '/* <%= pkg.name %> <%= pkg.version %> \n' + '* By <%= pkg.author %> \n' + '* Distributed under <%= pkg.license %> \n' + '* Copyrights <%= grunt.template.today("yyyy") %> . All Rights Reserved */\n',
+    jshint: {
+      options: {
+        ignores: ['./node_modules'],
+        node: true,
+        esnext: true,
+        bitwise: true,
+        camelcase: true,
+        curly: true,
+        eqeqeq: true,
+        immed: true,
+        indent: 2,
+        latedef: true,
+        newcap: true,
+        noarg: true,
+        quotmark: "single",
+        regexp: true,
+        undef: true,
+        unused: true,
+        strict: true,
+        trailing: true,
+        smarttabs: true,
+        white: true,
         globals: {
           jquery: true,
           browser: true
@@ -104,11 +103,11 @@ module.exports = function(grunt) {
       }
     }
   });
-grunt.loadNpmTasks('grunt-contrib-jshint');
-grunt.loadNpmTasks('grunt-contrib-uglify');
-grunt.loadNpmTasks('grunt-sass');
-grunt.loadNpmTasks('grunt-contrib-cssmin');
-grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-grunt.registerTask('default', ['jshint', 'uglify', 'sass', 'cssmin', 'watch']);
+  grunt.registerTask('default', ['jshint', 'uglify', 'sass', 'cssmin', 'watch']);
 };

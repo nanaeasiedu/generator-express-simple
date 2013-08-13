@@ -55,7 +55,7 @@ module.exports = function(grunt) {
           './public/style.css': './scss/style.scss'
         }
       }*/
-    }
+    },
     cssmin: {
       compress: {
         options: {

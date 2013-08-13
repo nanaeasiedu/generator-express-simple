@@ -74,7 +74,7 @@ module.exports = function(grunt) {
         options: {
           events: ['all'],
           livereload: 3355
-        },
+        }
       }
     }
   });
