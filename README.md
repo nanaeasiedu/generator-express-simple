@@ -1,4 +1,4 @@
-# generator-express-simple [![Build Status](https://secure.travis-ci.org/ngenerio/generator-express-simple.png?branch=master)](https://travis-ci.org/ngenerio/generator-express-simple)
+# generator-express-simple [![Build Status](https://github.com/ngenerio/generator-express-simple)](https://travis-ci.org/ngenerio/generator-express-simple)
 
 A generator for [Yeoman](http://yeoman.io).
 
