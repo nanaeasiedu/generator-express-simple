@@ -8,7 +8,13 @@ var ExpressSimpleGenerator = module.exports = function ExpressSimpleGenerator(ar
 
   this.on('end', function() {
     this.installDependencies({
-      skipInstall: options['skip-install']
+      skipInstall: options['skip-install'],
+      callback: function(err) {
+        if (err) {
+          console.log(err);
+        }
+        console.log('finished setting-up your app.=> generator-express-app.\n ' + this.pkg.author);
+      }
     });
   });
 
