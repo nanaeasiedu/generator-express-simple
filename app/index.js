@@ -5,7 +5,10 @@ var yeoman = require('yeoman-generator');
 
 var ExpressSimpleGenerator = module.exports = function ExpressSimpleGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
+  var root = this;
 
+  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+  this.packageJSON = JSON.parse(this.readFileAsString(path.join(__dirname, 'templates/express/jsonsData/package.json')));
   this.on('end', function() {
     this.installDependencies({
       skipInstall: options['skip-install'],
@@ -13,13 +16,10 @@ var ExpressSimpleGenerator = module.exports = function ExpressSimpleGenerator(ar
         if (err) {
           console.log(err);
         }
-        console.log('finished setting-up your app.=> generator-express-app.\n ' + this.pkg.author);
+        console.log('finished setting-up your app => generator-express-app\nBy' + root.pkg.author.name + '.\nAsk me any questions on twitter @eu_ingene');
       }
     });
   });
-
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
-  this.packageJSON = JSON.parse(this.readFileAsString(path.join(__dirname, 'templates/express/jsonsData/package.json')));
 };
 
 util.inherits(ExpressSimpleGenerator, yeoman.generators.Base);
