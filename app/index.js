@@ -16,7 +16,7 @@ var ExpressSimpleGenerator = module.exports = function ExpressSimpleGenerator(ar
         if (err) {
           console.log(err);
         }
-        console.log('finished setting-up your app => generator-express-app\nBy' + root.pkg.author.name + '.\nAsk me any questions on twitter @eu_ingene');
+        console.log('finished setting-up your app => generator-express-simple\nBy' + root.pkg.author.name + '.\nAsk me any questions on twitter @eu_ingene');
       }
     });
   });
