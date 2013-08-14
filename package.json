@@ -1,12 +1,12 @@
 {
   "name": "generator-express-simple",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "An express generator for Yeoman",
   "keywords": [
     "yeoman-generator",
     "express-simple",
     "yeoman-express-server",
-    "ngenerio-express-simple",
+    "express-simple",
     "simple yeoman express server",
     "preconfigured-express-server"
   ],
