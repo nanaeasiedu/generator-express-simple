@@ -82,9 +82,10 @@ ExpressSimpleGenerator.prototype.jqueryWriter = function jqueryWriter() {
     console.log('installing jquery');
     this.bowerInstall(['jquery'], {
       save: true
+    }, function() {
+      cb();
     });
   }
-  cb();
 };
 
 ExpressSimpleGenerator.prototype.normalizeWriter = function normalizeWriter() {

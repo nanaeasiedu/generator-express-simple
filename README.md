@@ -50,14 +50,14 @@ This simple command runs the grunt tasks and watches your files.As simple as tha
 ### express-simple
  express-simple comes preconfigured with less, normalize, cssmin, uglify, jshint, watch.You can edit it as you wish.
  
- As at now it has support for some html preprocessors or templates:
-  * [jade](https://github.com/visionmedia/jade)
-  * [hamljs](https://github.com/visionmedia/haml.js)
-  * [underscore](http://underscorejs.org)
+## As at now it has support for some html preprocessors or templates:
+  - [jade](https://github.com/visionmedia/jade)
+  - [hamljs](https://github.com/visionmedia/haml.js)
+  - [underscore](http://underscorejs.org)
 
- The css preprocessors supported are : 
-  * [less](http://lesscss.org)
-  * [scss](https://github.com/sindresorhus/grunt-sass)
+## The css preprocessors supported are : 
+  - [less](http://lesscss.org)
+  - [scss](https://github.com/sindresorhus/grunt-sass)
 
 ### Getting To Know Yeoman
 
