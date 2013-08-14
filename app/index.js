@@ -61,6 +61,23 @@ ExpressSimpleGenerator.prototype.askFor = function askFor() {
         return false;
       }
     }
+  }, {
+    type: 'confirm',
+    name: 'user_install_confirm',
+    message: 'Are there anything you want to install that we didn\'t add?',
+    default: true
+  }, {
+    type: 'input',
+    name: 'user_install',
+    message: 'Please enter whatever you want to install and if possible the version number and state whether is a developmentDepency or not.If you don\'t know the version number use a splat. Eg. name: \'module\', version: \'*\' & devDep: false, name: \'my_module\', version: \'0.3.4\', devDep: true\n',
+    default: '',
+    when: function(answers) {
+      if (answers.user_install_confirm) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }];
   this.prompt(prompts, function(props) {
     this.jquery = props.jquery;
@@ -68,6 +85,8 @@ ExpressSimpleGenerator.prototype.askFor = function askFor() {
     this.html_engine = props.html_engine;
     this.css_engine_confirm = props.css_engine_confirm;
     this.css_engine = props.css_engine;
+    this.user_install_confirm = props.user_install_confirm;
+    this.user_install = props.user_install;
     cb();
   }.bind(this));
 };
@@ -114,6 +133,33 @@ ExpressSimpleGenerator.prototype.jsonWriter = function jsonWriter() {
   }
   if (this.css_engine_confirm) {
     packageJSON.devDependencies[this.cssEngineHash[this.css_engine][0]] = this.cssEngineHash[this.css_engine][1]
+  }
+  if (this.user_install_confirm) {
+    var userInstall = this.user_install.indexOf('&') > -1 ? this.user_install.split('&') : [this.user_install];
+    var i = 0;
+    var j = 0;
+    var userArr = [];
+    var userObj;
+    var splitter;
+    var colonSplitter;
+    for (i; i < userInstall.length; i++) {
+      userObj = {};
+      splitter = userInstall[i].split(',');
+      for (j; j < splitter.length; j++) {
+        colonSplitter = splitter[j].split(':');
+        console.log(colonSplitter);
+        userObj[(colonSplitter[0]).trim()] = (colonSplitter[1]).trim();
+      }
+      userArr.push(userObj);
+    }
+    i = 0;
+    for (i; i < userArr.length; i++) {
+      if (userArr[i].devDep === true) {
+        packageJSON.devDependencies[userArr[i].name] = userArr[i].version;
+      } else {
+        packageJSON.dependencies[userArr[i].name] = userArr[i].version;
+      }
+    }
   }
   this.write('package.json', JSON.stringify(packageJSON, null, 2))
 };
