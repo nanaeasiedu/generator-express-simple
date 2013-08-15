@@ -75,7 +75,7 @@ ExpressSimpleGenerator.prototype.askFor = function askFor() {
   }, {
     type: 'input',
     name: 'user_install',
-    message: 'Please enter whatever you want to install and if possible the version number and state whether is a developmentDepency or not.If you don\'t know the version number use a splat. Eg. name: \'module\', version: \'*\' & devDep: false, name: \'my_module\', version: \'0.3.4\', devDep: true\n',
+    message: 'Please enter whatever you want to install and if possible the version number and state whether is a developmentDepency or not.If you don\'t know the version number use a splat. Eg. name: \'module\', version: \'*\', devDep: false & name: \'my_module\', version: \'0.3.4\', devDep: true\n',
     default: '',
     when: function(answers) {
       if (answers.user_install_confirm) {
