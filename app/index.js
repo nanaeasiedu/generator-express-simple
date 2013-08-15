@@ -232,6 +232,5 @@ ExpressSimpleGenerator.prototype.expressFilesWriter = function expressFilesWrite
     } else {
       this.copy('express/views/index.' + this.html_engine, 'views/index.haml');
     }
-    this.copy('jquery/jquery.min.js', 'public/js/jquery.min.js');
   }
 };
