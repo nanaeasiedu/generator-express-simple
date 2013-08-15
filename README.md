@@ -34,8 +34,9 @@ Finally, initiate the generator:
 ```
 $ yo express-simple
 ```
+This will walk you through a series of questions like the type of preprocessors you want too be installed and other modules you want to install.
 
-Then, run the express server with 
+After everything, run the express server with 
 
 ````
 $ node app
