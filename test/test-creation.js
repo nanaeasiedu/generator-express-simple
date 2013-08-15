@@ -1,13 +1,13 @@
 /*global describe, beforeEach, it*/
 'use strict';
 
-var path    = require('path');
+var path = require('path');
 var helpers = require('yeoman-generator').test;
 
 
-describe('express-simple generator', function () {
-  beforeEach(function (done) {
-    helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+describe('express-simple generator', function() {
+  beforeEach(function(done) {
+    helpers.testDirectory(path.join(__dirname, 'temp'), function(err) {
       if (err) {
         return done(err);
       }
@@ -19,7 +19,7 @@ describe('express-simple generator', function () {
     }.bind(this));
   });
 
-  it('creates expected files', function (done) {
+  it('creates expected files', function(done) {
     var expected = [
       // add files you expect to exist here.
       '.jshintrc',
@@ -30,7 +30,7 @@ describe('express-simple generator', function () {
       'someOption': true
     });
     this.app.options['skip-install'] = true;
-    this.app.run({}, function () {
+    this.app.run({}, function() {
       helpers.assertFiles(expected);
       done();
     });
