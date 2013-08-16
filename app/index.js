@@ -213,7 +213,7 @@ ExpressSimpleGenerator.prototype.expressFilesWriter = function expressFilesWrite
 
   if (this.jquery && this.html_engine_confirm) {
     if (this.html_engine === 'jade') {
-      this.copy('express/views/jqindex.jade', 'views/index.jade');
+      this.copy('express/views/jqjade.jade', 'views/index.jade');
       this.copy('express/views/layout.jade', 'views/layout.jade');
     } else if (this.html_engine === 'underscore') {
       this.copy('express/views/jq' + this.html_engine + '.html', 'views/index.html');

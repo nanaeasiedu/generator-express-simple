@@ -1,6 +1,6 @@
 {
   "name": "generator-express-simple",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "An express generator for Yeoman",
   "keywords": [
     "yeoman-generator",
