@@ -1,5 +1,4 @@
 # generator-express-simple 
-##  please do not use unless you are on an older version of yeoman
 A generator for [Yeoman](http://yeoman.io).
 
 
