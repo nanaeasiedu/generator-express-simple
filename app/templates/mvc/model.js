@@ -9,9 +9,14 @@ var mongoose = require('mongoose'),
 mongoose.model('Items', itemSchema);
 <% } else if (db === 'sequelize') { %>
 module.exports = function (sequelize, DataTypes) {
-  return sequlize.define('Items', {
+  return sequelize.define('Items', {
     itemName: DataTypes.STRING,
     price: DataTypes.INTEGER
+  }, {
+    timestamps: true,
+    underscored: true,
+    freezeTableName: true,
+    tableName: '<%= appname %>'
   });
 };
 <% } %>

@@ -40,7 +40,7 @@ appname - optional
 yo express-simple [appname] --mvc
 ```
 
-The mvc scaffolder has support for only mongoose and sequelize database modules which you choose when you are prompted to.
+The mvc scaffolder has support for only [mongoose](http://mongoosejs.com), a module for [mongodb](www.mongodb.org) and [sequelize](http://sequelizejs.com) database modules which you choose when you are prompted to.
 
 If you do not want any of that, just run
 
@@ -60,6 +60,12 @@ in one terminal to generate the basic css files and watch your files as you deve
 ```shell
 node app
 ``` 
+## Contributing
+To contribute to this yeoman generator, fork it, play with and send me a pull request at [express-simple-pulls](https://github.com/ngenerio/generator-express-simple/pulls)
+
+## Feature request
+If there is anything that you want to be added, just reach me at [@ngenerio](https://twitter.com/ngenerio).
+If you can implement that feature, why not, just see the contributing section up there (^).
 
 ## License
 

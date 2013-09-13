@@ -10,7 +10,7 @@ var express = require('express'),
     path = require('path'),<% if (db === 'mongoose') { %>
     mongoose = require('mongoose')<% } else { %>
     Sequelize = require('sequelize')<% } if (htmlEngine !== 'jade') { %>,
-    engines = require('consolidate')<% } else { %>;<% } %>
+    engines = require('consolidate');<% } else { %>;<% } %>
 
 var app = express();
 
@@ -49,23 +49,24 @@ var sequelize = new Sequelize('<%= appname %>', 'root', null, {
   protocol: null,
   logging: console.log,
   define: {
-    underscored: false
-    freezeTableName: false,
+    underscored: false,
+    freezeTableName: true,
     syncOnAssociation: true,
     timestamps: true
   }
 }),
-    Items = sequelize.import(__dirname + 'models/index.js');
+    Items = sequelize.import(__dirname + 'models/index');
 <% } %>
 var routesDir = './routes';
 fs.readdir(routesDir, function (err, files) {
   assert.ifError(err);
-  files.forEach(function (file) {
-    require(path.join(__dirname, routesDir, file)).init(app);
+  files.forEach(function (file) {<% if (db === 'mongoose') { %>
+    require(path.join(__dirname, routesDir, file)).init(app);<% } else if (db === 'sequelize') { %>
+    require(path.join(__dirname, routesDir, file)).init(Items, app);<% } %>
   });
 });
 
 http.createServer(app).listen(app.get('port'), function(){
   var urlOfApp = 'http://localhost:' + app.get('port');
-  console.log('server running : ' + urlOfApp);
+  console.log('server running : %s', urlOfApp);
 });
