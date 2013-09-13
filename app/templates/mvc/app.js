@@ -8,7 +8,7 @@ var express = require('express'),
     fs = require('fs'),
     assert = require('assert'),
     path = require('path'),<% if (db === 'mongoose') { %>
-    mongooose = require('mongooose')<% } else { %>
+    mongoose = require('mongoose')<% } else { %>
     Sequelize = require('sequelize')<% } if (htmlEngine !== 'jade') { %>,
     engines = require('consolidate')<% } else { %>;<% } %>
 
@@ -37,7 +37,7 @@ if ('development' === app.get('env')) {
 var dbUriString = 'mongodb://localhost/<%= appname %>',
     Items = require('./models/index');
 
-mongooose.connect(dbUriString, function (err, conn) {
+mongoose.connect(dbUriString, function (err, conn) {
 if (err) {
   console.log ('ERROR connecting to: ' + dbUriString + '. ' + err);
 } else {
