@@ -22,12 +22,25 @@ describe('express-simple generator', function () {
   it('creates expected files', function (done) {
     var expected = [
       // add files you expect to exist here.
-      '.jshintrc',
-      '.editorconfig'
+       'public/less/style.less',
+       'views/index.jade',
+       'views/404.jade',
+       'routes/index.js',
+       'bower.json',
+       'package.json',
+       'Gruntfile.js',
+       'app.js',
+       '.bowerrc',
+       '.editorconfig',
+       '.jshintrc',
+       '.travis.yml'
     ];
 
     helpers.mockPrompt(this.app, {
-      'someOption': true
+      'supportCssPreprocessor': true,
+      'cssPreprocessor': 'less',
+      'htmlEngine': 'jade',
+      'db': 'mongoose'
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {

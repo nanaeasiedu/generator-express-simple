@@ -136,7 +136,7 @@ ExpressSimpleGenerator.prototype.dependencies = function dependencies() {
   this.dep = 'express';
 
   if (this.db) {
-    this.dep += this.db;
+    this.dep += ' ' + this.db;
   }
   if (this.htmlEngine !== 'jade') {
     this.dep += ' consolidate';
