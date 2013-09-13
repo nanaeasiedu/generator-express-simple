@@ -133,7 +133,7 @@ ExpressSimpleGenerator.prototype.projectfiles = function projectfiles() {
 ExpressSimpleGenerator.prototype.dependencies = function dependencies() {
   var cb = this.async();
 
-  this.dep = '';
+  this.dep = 'express';
 
   if (this.db) {
     this.dep += this.db;
