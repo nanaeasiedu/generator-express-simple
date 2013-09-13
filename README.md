@@ -9,8 +9,8 @@ If you'd like to get to know Yeoman better and meet some of his friends, [Grunt]
 
 ## Overview
 Express-generator-simple supports these css preprocessors :
-- [less](lesscss.org)
-- [sass](sass-lang.com)
+- [less](http://lesscss.org)
+- [sass](http://sass-lang.com)
 <br></br>and these html template engines :
 - [jade](http://jade-lang.com)
 - [hamljs](https://github.com/visionmedia/haml.js)
