@@ -1,0 +1,40 @@
+<% if (htmlEngine === 'jade') { %>doctype 5
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title= title
+    link(rel="stylesheet", href="/css/style.min.css")
+
+  body
+    h1= title
+    p Express App
+    script(src="http://localhost:3355/livereload.js")
+    script(src="/bower_components/jquery/jquery.js")
+<% } else if (htmlEngine === 'haml') { %>
+!!! 5
+  %html{lang: 'en'}
+    %meta{charset: 'utf-8'}
+    %link{rel: 'stylesheet', href: '/css/style.min.css'}
+    %title= title
+  %body
+    %h1= title
+    %p
+      Express App
+    %script{src: 'http://localhost:3355/livereload.js'}
+    %script{src: '/bower_components/jquery/jquery.js'}
+<% } else if (htmlEngine === 'underscore') { %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title><%%= title %></title>
+  <link rel="stylesheet" href="/css/style.min.css"/>
+</head>
+<body>
+  <h1><%%= title %></h1>
+  <p>Express App</p>
+  <script src="http://localhost:3355/livereload.js"></script>
+  <script src="/bower_components/jquery/jquery.js"></script>
+</body>
+</html>
+<% } %>

@@ -1,0 +1,14 @@
+{
+    "node": true,
+    "eqeqeq": true,
+    "curly": true,
+    "debug": true,
+    "eqnull": true,
+    "multistr": true,
+    "asi": false,
+    "quotmark": "single",
+    "globals": {
+      "jquery": true,
+      "browser": true
+    }
+}
