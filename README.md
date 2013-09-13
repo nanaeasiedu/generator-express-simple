@@ -21,7 +21,7 @@ Express-generator-simple supports these css preprocessors :
 After installing yo using
 
 ```shell
-npm install -g yeoman
+npm install -g yo
 ```
 
 install generator-express-simple by running
