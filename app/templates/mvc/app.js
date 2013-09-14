@@ -55,7 +55,7 @@ var sequelize = new Sequelize('<%= appname %>', 'root', null, {
     timestamps: true
   }
 }),
-    Items = sequelize.import(__dirname + 'models/index');
+    Items = sequelize.import(__dirname + '/models/index');
 <% } %>
 var routesDir = './routes';
 fs.readdir(routesDir, function (err, files) {
