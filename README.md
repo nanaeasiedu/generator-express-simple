@@ -34,11 +34,11 @@ npm install -g generator-express-simple
 generator-express simple has now support  for mvc-style apps.
 To use the mvc scaffolder, just run
 
-appname - optional
 
 ```shell
 yo express-simple [appname] --mvc
 ```
+appname - optional
 
 The mvc scaffolder has support for only [mongoose](http://mongoosejs.com), a module for [mongodb](www.mongodb.org) and [sequelize](http://sequelizejs.com) database modules which you choose when you are prompted to.
 
