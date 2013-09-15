@@ -23,6 +23,6 @@
     "grunt-contrib-watch": "0.5.3"<% if (cssPreprocessor) { %>,<% if (cssPreprocessor === 'sass') { %>
     "grunt-sass": "0.6.1"<% } else if (cssPreprocessor === 'stylus') { %>
     "grunt-contrib-stylus": "0.8.0"<% } else if (cssPreprocessor === 'less') { %>
-    "grunt-contrib-less": "0.6.5"<% } }%>
+    "grunt-contrib-less": "0.7.0"<% } }%>
   }
 }
