@@ -1,6 +1,7 @@
 'use strict';
 var util = require('util'),
     path = require('path'),
+    colors = require('colors'),
     yeoman = require('yeoman-generator');
 
 
@@ -22,8 +23,15 @@ function ExpressSimpleGenerator(args, options, config) {
   });
 
   this.on('end', function () {
-    console.log('finished yo..ing app :)');
-    process.exit();
+    this.installDependencies({
+      skipInstall: options['skip-install'],
+      callback: function (err) {
+        if (err) {
+          console.log('looks like there were some errors while installing depedndencies and bower packages. Please run npm install and bower install to install them.'.underline.red);
+        }
+        console.log('done yo..ing app'.green);
+      }
+    });
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -106,8 +114,8 @@ ExpressSimpleGenerator.prototype.basicSetup = function basicSetup() {
   this.template('index.html', 'views/index.' + ext);
   this.template('404.html', 'views/404.' + ext);
   this.template('index.js', 'routes/index.js');
-  this.template('_bower.json', 'bower.json');
-  this.template('_package.json', 'package.json');
+  this.template('__bower.json', 'bower.json');
+  this.template('__package.json', 'package.json');
   this.template('Gruntfile.js');
   if (!this.options.mvc) this.template('app.js');
 };
@@ -130,75 +138,5 @@ ExpressSimpleGenerator.prototype.projectfiles = function projectfiles() {
   this.directory('.', '.');
 };
 
-ExpressSimpleGenerator.prototype.dependencies = function dependencies() {
-  var cb = this.async();
-
-  this.dep = 'express';
-
-  if (this.db) {
-    this.dep += ' ' + this.db;
-  }
-  if (this.htmlEngine !== 'jade') {
-    this.dep += ' consolidate';
-  }
-
-  this.dep += this.htmlEngine === 'haml' ? ' hamljs' : ' ' + this.htmlEngine;
-
-  console.log('installing dependencies for %s ...', this.appname);
-
-  this.npmInstall(this.dep, {save: true}, function (err) {
-    if (err) {
-      console.log('error installing dependencies :(', err);
-      process.exit();
-    }
-    console.log('installed dependencies :)');
-    cb();
-  });
-};
-
-ExpressSimpleGenerator.prototype.devDep = function devDep() {
-  var cb = this.async(),
-      gruntTasks = ['jshint', 'uglify', 'cssmin', 'imagemin', 'watch'];
-
-  this.gruntTasks = gruntTasks.map(function (task) {
-    return 'grunt-contrib-' + task;
-  });
-
-  if (this.cssPreprocessor) {
-    this.gruntTasks.push('grunt-'+ (this.cssPreprocessor === 'sass' ? 'sass' : 'contrib-' + this.cssPreprocessor));
-  }
-
-  this.gruntTasks.unshift('grunt');
-  this.gruntTasks.join(' ');
-
-  console.log('installing grunt dependencies for %s ...', this.appname);
-  this.npmInstall(this.gruntTasks, {
-    saveDev: true
-  }, function (err) {
-      if (err) {
-        console.log('error installing grunt dependencies', err);
-      }
-      console.log('installed grunt dependencies :)');
-      cb();
-  });
-};
-
-ExpressSimpleGenerator.prototype.bower = function bower() {
-  var cb = this.async();
-
-  this.bowerDep = 'jquery normalize-css';
-
-  console.log('installing bower packages for %s', this.appname);
-  this.bowerInstall(this.bowerDep, {
-    save: true
-  }, function (err) {
-    if (err) {
-      console.log('error installing bower packages :(');
-      process.exit();
-    }
-    console.log('finished installing bower packages :).');
-    cb();
-  });
-};
 
 module.exports = ExpressSimpleGenerator;

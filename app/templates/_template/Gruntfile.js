@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+    banner: '/* <%%= pkg.name %> <%%= pkg.version %> \n' + '* By <%%= pkg.author %> \n' + '* Distributed under <%%= pkg.license %> \n' + '* Copyrights <%%= grunt.template.today("yyyy") %> . All Rights Reserved */\n',
     pkg: grunt.file.readJSON('./package.json'),
     jshint: {
       options: {
@@ -11,6 +12,7 @@ module.exports = function(grunt) {
     },
     uglify: {
       options: {
+        banner: '<%%= banner %>',
         mangle: {
           except: ['jQuery', '$']
         }
@@ -54,6 +56,7 @@ module.exports = function(grunt) {
     cssmin: {
       compress: {
         options: {
+          banner: '<%%= banner %>'
         },
         files: {
           './public/css/style.min.css': ['./public/bower_components/normalize-css/normalize.css', './public/css/style.css']

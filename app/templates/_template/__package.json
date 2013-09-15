@@ -1,0 +1,28 @@
+{
+  "name": "<%= appname %>",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.4.0",<% if (options.mvc) { if (db === 'mongoose') { %>
+    "mongoose": "3.6.15",<% } else if (db === 'sequelize') { %>
+    "sequelize": "~2.0.0-beta.0",<% } } if (htmlEngine === 'jade') { %>
+    "jade": "0.35.0"<% } else { %>
+    "consolidate": "0.9.1",<% if (htmlEngine === 'haml')  { %>
+    "hamljs": "0.6.1"<% } else if (htmlEngine === 'underscore') { %>
+    "underscore": "1.5.2"<% } } %>
+  },
+  "devDependencies": {
+    "grunt": "0.4.1",
+    "grunt-contrib-jshint": "0.6.4",
+    "grunt-contrib-uglify": "0.2.4",
+    "grunt-contrib-cssmin": "0.6.1",
+    "grunt-contrib-imagemin": "0.3.0",
+    "grunt-contrib-watch": "0.5.3"<% if (cssPreprocessor) { %>,<% if (cssPreprocessor === 'sass') { %>
+    "grunt-sass": "0.6.1"<% } else if (cssPreprocessor === 'stylus') { %>
+    "grunt-contrib-stylus": "0.8.0"<% } else if (cssPreprocessor === 'less') { %>
+    "grunt-contrib-less": "0.6.5"<% } }%>
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "<%= appname %>",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.0.3",
+    "normalize-css": "2.1.3"
+  }
+}
+
