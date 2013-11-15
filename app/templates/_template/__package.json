@@ -20,7 +20,9 @@
     "grunt-contrib-uglify": "0.2.4",
     "grunt-contrib-cssmin": "0.6.1",
     "grunt-contrib-imagemin": "0.3.0",
-    "grunt-contrib-watch": "0.5.3"<% if (cssPreprocessor) { %>,<% if (cssPreprocessor === 'sass') { %>
+    "grunt-contrib-watch": "0.5.3",
+    "grunt-nodemon": "0.1.2",
+    "grunt-concurrent": "0.4.1"<% if (cssPreprocessor) { %>,<% if (cssPreprocessor === 'sass') { %>
     "grunt-sass": "0.6.1"<% } else if (cssPreprocessor === 'stylus') { %>
     "grunt-contrib-stylus": "0.8.0"<% } else if (cssPreprocessor === 'less') { %>
     "grunt-contrib-less": "0.7.0"<% } }%>

@@ -1,14 +1,20 @@
 {
-    "node": true,
-    "eqeqeq": true,
-    "curly": true,
-    "debug": true,
-    "eqnull": true,
-    "multistr": true,
-    "asi": false,
-    "quotmark": "single",
-    "globals": {
-      "jquery": true,
-      "browser": true
-    }
+  "eqeqeq": true,
+  "curly": false,
+  "debug": true,
+  "eqnull": true,
+  "multistr": true,
+  "asi": false,
+  "quotmark": "single",
+  "plusplus": true,
+  "nomen": true,
+  "indent": true,
+  "newcap": true,
+  "nonew": true,
+  "undef": true,
+  "globals": {
+    "jquery": true,
+    "browser": true,
+    "node": true
+  }
 }

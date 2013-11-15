@@ -6,9 +6,10 @@ module.exports = function(grunt) {
       options: {
         ignores: ['./node_modules', './public/bower_components/**/*.js', './**/*.min.js'],
         jshintrc: '.jshintrc'
-      },<% if (options.mvc !== false) { %>
-      all: ['routes/**/*.js', 'public/**/*.js', 'models/**/*.js', 'controllers/**/*.js', 'app.js', 'Grunfile.js']<% } else { %>
-      all: ['routes/**/*.js', 'public/**/*.js', 'app.js', 'Grunfile.js']<% } %>
+      },
+      gruntfile: 'Gruntfile.js',<% if (options.mvc !== false) { %>
+      all: ['routes/**/*.js', 'public/**/*.js', 'models/**/*.js', 'controllers/**/*.js', 'app.js']<% } else { %>
+      all: ['routes/**/*.js', 'public/**/*.js', 'app.js']<% } %>
     },
     uglify: {
       options: {
@@ -22,25 +23,36 @@ module.exports = function(grunt) {
       }
     },<% if (cssPreprocessor === 'less') { %>
     less: {
-      development: {
-        options: {
-          paths: ['./public/less']
-        },
+      options: {
+        paths: ['./public/less']
+      },
+      dev: {
         files: {
           './public/css/style.css': './public/less/style.less'
+        }
+      },
+      production: {
+        options: {
+          yuicompress: true
         }
       }
     },<% } else if (cssPreprocessor === 'stylus') { %>
     stylus: {
-      compile: {
-        options: {
-          paths: ['./public/stylus'],
-          import: [],
-          compress: false
-        },
+      options: {
+        paths: ['./public/stylus'],
+        import: [],
+        compress: false
+      },
+      dev: {
         files: {
           './public/css/style.css': './public/stylus/style.styl'
         }
+      },
+      production: {
+        options: {
+          compress: true
+        },
+        files: {}
       }
     },<% } else if (cssPreprocessor === 'sass') { %>
     sass: {
@@ -54,13 +66,16 @@ module.exports = function(grunt) {
       }
     },<% } %>
     cssmin: {
-      compress: {
-        options: {
-          banner: '<%%= banner %>'
-        },
+      options: {
+        banner: '<%%= banner %>'
+      },
+      dev: {
         files: {
           './public/css/style.min.css': ['./public/bower_components/normalize-css/normalize.css', './public/css/style.css']
         }
+      },
+      production: {
+        files: {}
       }
     },
     imagemin: {
@@ -69,36 +84,85 @@ module.exports = function(grunt) {
         files: {}
       }
     },
-    watch: {
-      scripts: {
-        files: ['!node_modules', 'app.js', 'Grunfile.js', './public/**/*.js', './routes/**/*.js'],
+    nodemon: {
+      options: {
+        file: 'app.js',
+        // put args here
+        // the same as running
+        // node app [args]
+        args: [],
+        legacyWatch: true,
+        ignoredFiles: ['./node_modules/**', './public/**'],
+        watchedExtensions: ['js'],
+        watchedFolder: [<% if (!!options.mvc) { %>'controllers', 'models'<% } %>, 'routes'],
+        env: {
+          PORT: 3000,
+          NODE_ENV: 'development'
+        }
+      },
+      server: {
         options: {
-          livereload: 3355,
-          events: ['all']
+          // your server config
+          // check https://github.com/ChrisWren/grunt-nodemon for more information on configuration
+          // args: ['development']
+        }
+      },
+      debug: {
+        options: {
+          nodeArgs: ['--debug'] // you can use --debug-brk
+        }
+      }
+    },
+    watch: {
+      gruntfile: {
+        files: 'Gruntfile.js',
+        tasks: ['jshint:gruntfile'],
+      },
+      scripts: {
+        // watch changes for public files
+        files: ['!**/node_modules/**', './public/**/*.js'],
+        options: {
+          livereload: 3355
         },
         tasks: ['jshint', 'uglify']
       }<% if (cssPreprocessor) { %>,
       <%= cssPreprocessor %>: {
-        files: ['!node_modules', <% if (cssPreprocessor === 'sass') { %>'./**/*scss'<% } else if (cssPreprocessor && cssPreprocessor !== 'sass') { %>'./**/*<%= cssPreprocessor %>'<% } %>],
-        options: {
-          events: ['all']
-        },
-        tasks: ['<%= cssPreprocessor %>', 'cssmin']
+        files: ['!**/node_modules/**', <% if (cssPreprocessor === 'sass') { %>'./**/*scss'<% } else if (cssPreprocessor && cssPreprocessor !== 'sass') { %>'./**/*<%= cssPreprocessor %>'<% } %>],
+        tasks: ['<%= cssPreprocessor %>']
       }<% } %>,
       css: {
-        files: ['!node_modules', './public/**/*.css'],
+        files: ['!**/node_modules/**', './public/**/*.css'],
         options: {
-          events: ['all'],
           livereload: 3355
         },
         tasks: ['cssmin']
       },<% if (htmlEngine === 'underscore') { %>
       html<% } else { %><%= htmlEngine %><% } %>: {
-        files: ['!node_modules', <% if  (htmlEngine === 'underscore') { %>'./views/**/*.html'<% } else { %>'./views/**/*.<%= htmlEngine %>'<% } %>],
+        files: ['!**/node_modules/**', <% if  (htmlEngine === 'underscore') { %>'./views/**/*.html'<% } else { %>'./views/**/*.<%= htmlEngine %>'<% } %>],
         options: {
           events: ['all'],
           livereload: 3355
         }
+      }<% if (!!cssPreprocessor) { %>,
+      livereload: {
+        options: {
+          livereload: true
+        },
+        files: './public/<%= cssPreprocessor %>/**/*',
+        tasks: ['cssmin']
+      }<% } %>
+    },
+    // concurrent task
+    // see https://github.com/sindresorhus/grunt-concurrent for more information on setup
+    concurrent: {
+      options: {
+        logConcurrentOutput: true
+      },
+      server: {
+        tasks: ['nodemon:server', 'watch']
+      },
+      debug: {
+        tasks: ['nodemon:debug']
       }
     }
   });
@@ -109,6 +173,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-concurrent');
 
-  grunt.registerTask('default', ['jshint', 'uglify', 'imagemin', <% if (cssPreprocessor) { %>'<%= cssPreprocessor %>', <% } %>'cssmin', 'watch']);
+  grunt.registerTasks('default', ['jshint', 'uglify', 'imagemin', <% if (cssPreprocessor) { %>'<%= cssPreprocessor %>:dev', <% } %>'cssmin:dev', 'concurrent:server']);
+  grunt.registerTasks('server', ['concurrent:server']);
+  grunt.registerTasks('debug', ['concurrent:debug']);
+  grunt.registerTasks('production', ['uglify:production',<% if (cssPreprocessor) { %>'<%= cssPreprocessor %>:production', <% } %>'cssmin:production']);
+  // your test over here
+  // grunt.registerTasks('test', [])
 };

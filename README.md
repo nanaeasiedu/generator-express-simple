@@ -40,7 +40,7 @@ yo express-simple [appname] --mvc
 ```
 appname - optional
 
-The mvc scaffolder has support for only [mongoose](http://mongoosejs.com), a module for [mongodb](www.mongodb.org) and [sequelize](http://sequelizejs.com) database modules which you choose when you are prompted to.
+The mvc scaffolder has support for only [mongoose](http://mongoosejs.com), a [mongodb](www.mongodb.org) module and [sequelize](http://sequelizejs.com) database modules which you choose when you are prompted to.
 
 If you do not want any of that, just run
 
@@ -52,20 +52,16 @@ Now your app is ready to be run.
 ## Running
 To run app, first run
 
+All configurations are in the Gruntfile, to start the server and start developping run, this will start the express app using grunt-nodemon and grunt-concurrent, watches the files as you build and runs tasks on the fly
+
 ```shell
-grunt
+grunt server
 ```
-in one terminal to generate the basic css files and watch your files as you develop and in another terminal, run :
+To debug,
 
 ```shell
-node app
-``` 
-## Contributing
-To contribute to this yeoman generator, fork it, play with and send me a pull request at [express-simple-pulls](https://github.com/ngenerio/generator-express-simple/pulls)
-
-## Feature request
-If there is anything that you want to be added, just reach me at [@ngenerio](https://twitter.com/ngenerio).
-If you can implement that feature, why not, just see the contributing section up there (^).
+grunt debug
+```
 
 ## License
 

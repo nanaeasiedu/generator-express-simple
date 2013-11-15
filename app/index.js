@@ -49,6 +49,12 @@ ExpressSimpleGenerator.prototype.askFor = function askFor() {
 
   var prompts = [{
     type: 'confirm',
+    name: 'includeBootstrap',
+    message: 'Would you like to include Twitter Bootstrap?',
+    default: false
+  },
+  {
+    type: 'confirm',
     name: 'supportCssPreprocessor',
     message: 'Would you like to install any css preprocessor?',
     default: false
@@ -86,6 +92,7 @@ ExpressSimpleGenerator.prototype.askFor = function askFor() {
   }];
 
   this.prompt(prompts, function (props) {
+    this.includeBootstrap = props.includeBootstrap;
     this.cssPreprocessor = props.supportCssPreprocessor ? props.cssPreprocessor : false;
     this.htmlEngine = props.htmlEngine;
     this.db = props.db || null;
