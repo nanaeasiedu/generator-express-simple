@@ -60,6 +60,7 @@ default grunt task is
 grunt
 ```
 
+grunt server task
 ```shell
 grunt server
 ```

@@ -1,4 +1,5 @@
 {
+  "node": true,
   "eqeqeq": true,
   "curly": false,
   "debug": true,
@@ -8,13 +9,12 @@
   "quotmark": "single",
   "plusplus": true,
   "nomen": true,
-  "indent": true,
+  "indent": 2,
   "newcap": true,
   "nonew": true,
   "undef": true,
   "globals": {
     "jquery": true,
-    "browser": true,
-    "node": true
+    "browser": true
   }
 }

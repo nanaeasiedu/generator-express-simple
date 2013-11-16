@@ -38,11 +38,11 @@ var dbUriString = 'mongodb://localhost/<%= appname %>',
     Items = require('./models/index');
 
 mongoose.connect(dbUriString, function (err, conn) {
-if (err) {
-  console.log ('ERROR connecting to: ' + dbUriString + '. ' + err);
-} else {
-  console.log ('Successfully connected to: ' + dbUriString);
-}
+  if (err) {
+    console.log ('ERROR connecting to: ' + dbUriString + '. ' + err);
+  } else {
+    console.log ('Successfully connected to: ' + dbUriString);
+  }
 });<% } else if (db === 'sequelize') { %>
 var sequelize = new Sequelize('<%= appname %>', 'root', null, {
   dialect: 'mysql',

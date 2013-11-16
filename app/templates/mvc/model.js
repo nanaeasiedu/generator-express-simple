@@ -1,14 +1,12 @@
-<% if (db === 'mongoose') { %>
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    itemSchema = new Schema({
-      itemName: String,
-      price: Number
-    });
+<% if (db === 'mongoose') { %>var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
-mongoose.model('Items', itemSchema);
-<% } else if (db === 'sequelize') { %>
-module.exports = function (sequelize, DataTypes) {
+var itemSchema = new Schema({
+  itemName: String,
+  price: Number
+});
+
+mongoose.model('Items', itemSchema);<% } else if (db === 'sequelize') { %>module.exports = function (sequelize, DataTypes) {
   return sequelize.define('Items', {
     itemName: DataTypes.STRING,
     price: DataTypes.INTEGER
@@ -18,5 +16,4 @@ module.exports = function (sequelize, DataTypes) {
     freezeTableName: true,
     tableName: '<%= appname %>'
   });
-};
-<% } %>
+};<% } %>
