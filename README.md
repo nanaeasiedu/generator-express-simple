@@ -8,21 +8,21 @@ A simple express generator for [Yeoman](http://yeoman.io).
 If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
 
 ## Overview
+
+The generator comes with [jquery](http://jquery.com) and [normalize-css](https://github.com/necolas/normalize.css) and optional [Bootstrap](http://getbootstrap.com)
+
 Express-generator-simple supports these css preprocessors :
+
 - [less](http://lesscss.org)
 - [sass](http://sass-lang.com)
+
 <br></br>and these html template engines :
+
 - [jade](http://jade-lang.com)
 - [hamljs](https://github.com/visionmedia/haml.js)
 - [underscore](http://documentcloud.github.io/underscore/#template)
 
 ## Installing
-
-After installing yo using
-
-```shell
-npm install -g yo
-```
 
 install generator-express-simple by running
 
@@ -31,7 +31,7 @@ npm install -g generator-express-simple
 ```
 
 ## Usage
-generator-express simple has now support  for mvc-style apps.
+generator-express-simple has now support  for mvc-style apps.
 To use the mvc scaffolder, just run
 
 
@@ -40,7 +40,7 @@ yo express-simple [appname] --mvc
 ```
 appname - optional
 
-The mvc scaffolder has support for only [mongoose](http://mongoosejs.com), a [mongodb](www.mongodb.org) module and [sequelize](http://sequelizejs.com) database modules which you choose when you are prompted to.
+The mvc scaffolder has support for only [mongoose](http://mongoosejs.com), a [mongodb](http://mongodb.org) module and [sequelize](http://sequelizejs.com) database modules which you choose when you are prompted to.
 
 If you do not want any of that, just run
 
@@ -50,22 +50,22 @@ yo express-simple [appname]
 Now your app is ready to be run.
 
 ## Running
-To run app, first run
+All configurations are in the Gruntfile, to start the server and start developping run, this will start the express app using grunt-nodemon and grunt-concurrent.Watches the files as you develop and runs the tasks.
 
-All configurations are in the Gruntfile, to start the server and start developping run, this will start the express app using grunt-nodemon and grunt-concurrent, watches the files as you build and runs tasks on the fly
+There are configurations that you have to take a look at and configure to suit your needs.
 
-default grunt task is
+To run the default grunt task use,
 
 ```shell
 grunt
 ```
 
-grunt server task
+To run the grunt server task that waches the server files as you develop and restarts the server using nodemon, run this tasks:
+
 ```shell
 grunt server
 ```
-To debug,
-
+To debug the application run,
 ```shell
 grunt debug
 ```
