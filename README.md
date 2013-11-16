@@ -15,6 +15,7 @@ Express-generator-simple supports these css preprocessors :
 
 - [less](http://lesscss.org)
 - [sass](http://sass-lang.com)
+- [stylus](http://learnboost.github.io/stylus/)
 
 <br></br>and these html template engines :
 
