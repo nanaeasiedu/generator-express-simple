@@ -176,10 +176,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
 
-  grunt.registerTasks('default', ['jshint', 'uglify', 'imagemin', <% if (cssPreprocessor) { %>'<%= cssPreprocessor %>:dev', <% } %>'cssmin:dev', 'concurrent:server']);
-  grunt.registerTasks('server', ['concurrent:server']);
-  grunt.registerTasks('debug', ['concurrent:debug']);
-  grunt.registerTasks('production', ['uglify:production',<% if (cssPreprocessor) { %>'<%= cssPreprocessor %>:production', <% } %>'cssmin:production']);
+  grunt.registerTask('default', ['jshint', 'uglify', 'imagemin', <% if (cssPreprocessor) { %>'<%= cssPreprocessor %>:dev', <% } %>'cssmin:dev', 'concurrent:server']);
+  grunt.registerTask('server', ['concurrent:server']);
+  grunt.registerTask('debug', ['concurrent:debug']);
+  grunt.registerTask('production', ['uglify:production',<% if (cssPreprocessor) { %>'<%= cssPreprocessor %>:production', <% } %>'cssmin:production']);
   // your test over here
-  // grunt.registerTasks('test', [])
+  // grunt.registerTask('test', [])
 };
