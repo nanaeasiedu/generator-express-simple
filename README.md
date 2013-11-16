@@ -54,6 +54,12 @@ To run app, first run
 
 All configurations are in the Gruntfile, to start the server and start developping run, this will start the express app using grunt-nodemon and grunt-concurrent, watches the files as you build and runs tasks on the fly
 
+default grunt task is
+
+```shell
+grunt
+```
+
 ```shell
 grunt server
 ```

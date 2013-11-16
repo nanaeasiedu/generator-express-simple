@@ -7,9 +7,9 @@ module.exports = function(grunt) {
         ignores: ['./node_modules', './public/bower_components/**/*.js', './**/*.min.js'],
         jshintrc: '.jshintrc'
       },
-      gruntfile: 'Gruntfile.js',<% if (options.mvc !== false) { %>
+      gruntfile: 'Gruntfile.js',<% if (!!options.mvc) { %>
       all: ['routes/**/*.js', 'public/**/*.js', 'models/**/*.js', 'controllers/**/*.js', 'app.js']<% } else { %>
-      all: ['routes/**/*.js', 'public/**/*.js', 'app.js']<% } %>
+      all: ['routes/**/*.js', 'public/**/*.js', 'app.js']<%} %>
     },
     uglify: {
       options: {
@@ -94,7 +94,7 @@ module.exports = function(grunt) {
         legacyWatch: true,
         ignoredFiles: ['./node_modules/**', './public/**'],
         watchedExtensions: ['js'],
-        watchedFolder: [<% if (!!options.mvc) { %>'controllers', 'models'<% } %>, 'routes'],
+        watchedFolder: [<% if (!!options.mvc) { %>'controllers', 'models', <% } %>'routes'],
         env: {
           PORT: 3000,
           NODE_ENV: 'development'
@@ -125,11 +125,11 @@ module.exports = function(grunt) {
           livereload: 3355
         },
         tasks: ['jshint', 'uglify']
-      }<% if (cssPreprocessor) { %>,
+      },<% if (cssPreprocessor) { %>
       <%= cssPreprocessor %>: {
-        files: ['!**/node_modules/**', <% if (cssPreprocessor === 'sass') { %>'./**/*scss'<% } else if (cssPreprocessor && cssPreprocessor !== 'sass') { %>'./**/*<%= cssPreprocessor %>'<% } %>],
+        files: ['!**/node_modules/**',<% if (cssPreprocessor === 'sass') { %>'./**/*scss' <% } else if (cssPreprocessor && cssPreprocessor !== 'sass') { %> './**/*<%= cssPreprocessor %>' <% } %>],
         tasks: ['<%= cssPreprocessor %>']
-      }<% } %>,
+      },<% } %>
       css: {
         files: ['!**/node_modules/**', './public/**/*.css'],
         options: {
@@ -137,8 +137,9 @@ module.exports = function(grunt) {
         },
         tasks: ['cssmin']
       },<% if (htmlEngine === 'underscore') { %>
-      html<% } else { %><%= htmlEngine %><% } %>: {
-        files: ['!**/node_modules/**', <% if  (htmlEngine === 'underscore') { %>'./views/**/*.html'<% } else { %>'./views/**/*.<%= htmlEngine %>'<% } %>],
+      html<% } else { %>
+      <%= htmlEngine %><% } %>: {
+        files: ['!**/node_modules/**', <% if (htmlEngine === 'underscore') { %> './views/**/*.html' <% } else { %> './views/**/*.<%= htmlEngine %>'<% } %>],
         options: {
           events: ['all'],
           livereload: 3355
@@ -162,10 +163,11 @@ module.exports = function(grunt) {
         tasks: ['nodemon:server', 'watch']
       },
       debug: {
-        tasks: ['nodemon:debug']
+        tasks: ['nodemon:debug', 'watch']
       }
     }
   });
+  // load the tasks
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');<% if (cssPreprocessor === 'sass') { %>
   grunt.loadNpmTasks('grunt-<%= cssPreprocessor %>');<% } else if (cssPreprocessor && cssPreprocessor !== 'sass') { %>
@@ -176,10 +178,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
 
-  grunt.registerTask('default', ['jshint', 'uglify', 'imagemin', <% if (cssPreprocessor) { %>'<%= cssPreprocessor %>:dev', <% } %>'cssmin:dev', 'concurrent:server']);
+  // default tasks
+  grunt.registerTask('default', ['jshint', 'uglify', 'imagemin', <% if (cssPreprocessor) { %> '<%= cssPreprocessor %>', <% } %> 'cssmin:dev', 'concurrent:server']);
+  // server task
   grunt.registerTask('server', ['concurrent:server']);
+  // to use the debug task, install node-inspector
+  // in a terminal run node-inspector
+  // check out grunt-node-inspector: https://github.com/ChrisWren/grunt-node-inspector to use the grunt task
   grunt.registerTask('debug', ['concurrent:debug']);
-  grunt.registerTask('production', ['uglify:production',<% if (cssPreprocessor) { %>'<%= cssPreprocessor %>:production', <% } %>'cssmin:production']);
+  // grunt.registerTask('production', ['uglify:production',<% if (cssPreprocessor) { %>'<%= cssPreprocessor %>:production',<% } %> 'cssmin:production']);
   // your test over here
-  // grunt.registerTask('test', [])
+  // grunt.registerTask('test', []);
 };

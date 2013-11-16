@@ -10,11 +10,7 @@
   ],
   "homepage": "https://github.com/ngenerio/generator-express-simple",
   "bugs": "https://github.com/ngenerio/generator-express-simple/issues",
-  "author": {
-    "name": "Eugene Asiedu",
-    "email": "ngene84@gmail.com",
-    "url": "https://github.com/ngenerio"
-  },
+  "author": "Eugene Asiedu <ngene84@gmail.com> (https://about.me/ngenerio)",
   "main": "app/index.js",
   "repository": {
     "type": "git",
