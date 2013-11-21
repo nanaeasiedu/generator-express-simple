@@ -120,18 +120,18 @@ module.exports = function(grunt) {
       },
       scripts: {
         // watch changes for public files
-        files: ['!**/node_modules/**', './public/**/*.js'],
+        files: ['!./node_modules/**', './public/**/*.js'],
         options: {
           livereload: 3355
         },
         tasks: ['jshint', 'uglify']
       },<% if (cssPreprocessor) { %>
       <%= cssPreprocessor %>: {
-        files: ['!**/node_modules/**',<% if (cssPreprocessor === 'sass') { %>'./**/*scss' <% } else if (cssPreprocessor && cssPreprocessor !== 'sass') { %> './**/*<%= cssPreprocessor %>' <% } %>],
+        files: ['!./node_modules/**',<% if (cssPreprocessor === 'sass') { %>'./**/*scss' <% } else if (cssPreprocessor && cssPreprocessor !== 'sass') { %> './**/*<%= cssPreprocessor %>' <% } %>],
         tasks: ['<%= cssPreprocessor %>']
       },<% } %>
       css: {
-        files: ['!**/node_modules/**', './public/**/*.css'],
+        files: ['!./node_modules/**', './public/**/*.css'],
         options: {
           livereload: 3355
         },
@@ -139,7 +139,7 @@ module.exports = function(grunt) {
       },<% if (htmlEngine === 'underscore') { %>
       html<% } else { %>
       <%= htmlEngine %><% } %>: {
-        files: ['!**/node_modules/**', <% if (htmlEngine === 'underscore') { %> './views/**/*.html' <% } else { %> './views/**/*.<%= htmlEngine %>'<% } %>],
+        files: ['!./node_modules/**', <% if (htmlEngine === 'underscore') { %> './views/**/*.html' <% } else { %> './views/**/*.<%= htmlEngine %>'<% } %>],
         options: {
           events: ['all'],
           livereload: 3355

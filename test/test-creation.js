@@ -4,7 +4,7 @@
 var path    = require('path');
 var helpers = require('yeoman-generator').test;
 
-
+// TODO: write more test for generator
 describe('express-simple generator', function () {
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
@@ -40,7 +40,7 @@ describe('express-simple generator', function () {
       'supportCssPreprocessor': true,
       'cssPreprocessor': 'less',
       'htmlEngine': 'jade',
-      'db': 'mongoose'
+      'db': null
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {

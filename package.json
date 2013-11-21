@@ -17,7 +17,7 @@
     "url": "git://github.com/ngenerio/generator-express-simple.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --reporter dot"
   },
   "dependencies": {
     "yeoman-generator": "~0.13.0",
