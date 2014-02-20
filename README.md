@@ -41,7 +41,7 @@ yo express-simple [appname] --mvc
 ```
 appname - optional
 
-The mvc scaffolder has support for only [mongoose](http://mongoosejs.com), a [mongodb](http://mongodb.org) module and [sequelize](http://sequelizejs.com) database modules which you choose when you are prompted to.
+The mvc scaffolder has support for only [mongoose](http://mongoosejs.com), a [mongodb](http://mongodb.org) orm module.
 
 If you do not want any of that, just run
 
