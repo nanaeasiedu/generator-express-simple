@@ -3,17 +3,12 @@
  */
 
 var express  = require('express'),
-    path     = require('path'),
-    mongoose = require('mongoose'),<% if (viewEngine === 'hbs') { %>
+    path     = require('path'),<% if (viewEngine === 'hbs') { %>
     hbs      = require('express-hbs'),<% } %>
     config   = require('./config'),
     routes   = require('./routes');
 
 
-mongoose.connect(config.database.url);
-mongoose.connection.on('error', function() {
-  console.log('mongodb connection error');
-});
 
 var app = express();
 
@@ -27,11 +22,9 @@ app.set('view engine', <%= viewEngine %>);
 app.use(express.compress());
 app.use(express.favicon());
 app.use(express.logger('dev'));
-app.use(express.cookieParser());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(express.session({ secret: 'your secret code' }));
 app.use(app.router);
 app.use(express.static( path.join(__dirname, 'public')));
 app.use(function(req, res) {

@@ -19,28 +19,30 @@ describe('express-simple generator', function () {
     }.bind(this));
   });
 
-  it('creates expected files', function (done) {
+  it('creates expected files for mvc style app', function (done) {
     var expected = [
       // add files you expect to exist here.
-       'public/less/style.less',
-       'views/index.jade',
-       'views/404.jade',
+       'public/stylus/styles.styl',
+       'public/js/main.js',
+       'views/index.hbs',
+       'views/404.hbs',
        'routes/index.js',
+       'controllers/index.js',
+       'models/user.js',
        'bower.json',
        'package.json',
        'Gruntfile.js',
        'app.js',
        '.bowerrc',
        '.editorconfig',
-       '.jshintrc',
-       '.travis.yml'
+       '.gitignore',
+       '.jshintrc'
     ];
 
     helpers.mockPrompt(this.app, {
-      'supportCssPreprocessor': true,
-      'cssPreprocessor': 'less',
-      'htmlEngine': 'jade',
-      'db': null
+      'mvc': true,
+      'cssPreprocessor': 'stylus',
+      'viewEngine': 'hbs'
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
