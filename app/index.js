@@ -1,7 +1,6 @@
 'use strict';
 var util = require('util'),
     path = require('path'),
-    colors = require('colors'),
     yeoman = require('yeoman-generator');
 
 
@@ -19,19 +18,11 @@ function ExpressSimpleGenerator(args, options, config) {
     desc: 'create a mvc express-app',
     type: Boolean,
     banner: 'yo express-simple --mvc',
-    defaults: false
+    defaults: true
   });
 
   this.on('end', function () {
-    this.installDependencies({
-      skipInstall: options['skip-install'],
-      callback: function (err) {
-        if (err) {
-          console.log('looks like there were some errors while installing depedndencies and bower packages. Please run npm install and bower install to install them.'.underline.red);
-        }
-        console.log('done yo..ing app'.green);
-      }
-    });
+    this.installDependencies({skipInstall: options['skip-install']});
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -39,108 +30,132 @@ function ExpressSimpleGenerator(args, options, config) {
 
 util.inherits(ExpressSimpleGenerator, yeoman.generators.Base);
 
-ExpressSimpleGenerator.prototype.askFor = function askFor() {
+ExpressSimpleGenerator.prototype.askFor = function () {
   var cb = this.async(),
       root = this;
 
-  // have Yeoman greet the user.
-  console.log(this.yeoman);
-  console.log('express-simple comes with normalize-css and jquery');
+  console.log('express-simple comes with bootstrap and jquery');
 
-  var prompts = [{
-    type: 'confirm',
-    name: 'includeBootstrap',
-    message: 'Would you like to include Twitter Bootstrap?',
-    default: false
-  },
-  {
-    type: 'confirm',
-    name: 'supportCssPreprocessor',
-    message: 'Would you like to install any css preprocessor?',
-    default: false
-  },
-  {
-    type: 'list',
-    name: 'cssPreprocessor',
-    message: 'Select the css preprocessor you would like to use',
-    default: 'less',
-    choices: ['less', 'sass', 'stylus'],
-    when: function (ansHash) {
-      if (ansHash.supportCssPreprocessor) {
-        return true;
-      }
+  var prompts = [
+    {
+      type: 'confirm',
+      name: 'mvc',
+      message: 'Do you want an mvc express app',
+      default:  true
+    },
+    {
+      type: 'list',
+      name: 'cssPreprocessor',
+      message: 'Select the css preprocessor you would like to use',
+      default: 'less',
+      choices: ['less', 'sass', 'stylus'],
+
+    },
+    {
+      type: 'list',
+      name: 'viewEngine',
+      message: 'Select view engine you would like to use',
+      default: 'jade',
+      choices: ['jade', 'handlebars']
     }
-  },
-  {
-    type: 'list',
-    name: 'htmlEngine',
-    message: 'Select the html engine you would like to use',
-    default: 'jade',
-    choices: ['jade', 'haml', 'underscore']
-  },
-  {
-    type: 'list',
-    name: 'db',
-    message: 'Choose the database module you would like to use for your mvc app',
-    default: 'mongoose',
-    choices: ['mongoose', 'sequelize'],
-    when: function () {
-      if (root.options.mvc) {
-        return true;
-      }
-    }
-  }];
+  ];
 
-  this.prompt(prompts, function (props) {
-    this.includeBootstrap = props.includeBootstrap;
-    this.cssPreprocessor = props.supportCssPreprocessor ? props.cssPreprocessor : false;
-    this.htmlEngine = props.htmlEngine;
-    this.db = props.db || null;
-
+  var answersCallback = (function (answers) {
+    this.options.mvc = answers.mvc;
+    this.cssPreprocessor = answers.cssPreprocessor;
+    this.cssExt = this.cssPreprocessor === 'stylus' ? 'styl' : (this.cssPreprocessor === 'sass' ? 'scss' : this.cssPreprocessor);
+    this.viewEngine = answers.viewEngine === 'handlebars' ? 'hbs' : answers.viewEngine;
     cb();
-  }.bind(this));
+  }).bind(this);
+
+  this.prompt(prompts, answersCallback);
 };
 
-ExpressSimpleGenerator.prototype.basicSetup = function basicSetup() {
-  var ext = this.htmlEngine === 'underscore' ? 'html' : this.htmlEngine;
-
-  this.mkdir('public' + (this.cssPreprocessor ? '/' + this.cssPreprocessor : ''));
-  this.mkdir('public/bower_components');
+ExpressSimpleGenerator.prototype.basicSetup = function () {
+  this.mkdir('public');
+  this.mkdir('public/' + this.cssPreprocessor);
+  this.mkdir('public/vendor');
   this.mkdir('public/img');
   this.mkdir('public/css');
   this.mkdir('public/js');
 
-  this.mkdir('views');
-  this.mkdir('routes');
-
-  this.sourceRoot(path.join(__dirname, 'templates', '_template'));
-  this.template('style.css', ('public/' + (this.cssPreprocessor ?
-                this.cssPreprocessor + '/style.' + (this.cssPreprocessor === 'stylus' ?
-                                                    'styl' : (this.cssPreprocessor === 'sass' ?
-                                                              'scss': 'less')) : 'css/style.css')));
-  this.template('index.html', 'views/index.' + ext);
-  this.template('404.html', 'views/404.' + ext);
-  this.template('index.js', 'routes/index.js');
-  this.template('__bower.json', 'bower.json');
-  this.template('__package.json', 'package.json');
-  this.template('Gruntfile.js');
-  if (!this.options.mvc) this.template('app.js');
+  this.template('styles.css', 'public/' + this.cssPreprocessor + '/styles.' + this.cssExt);
+  this.copy('main.js', 'public/js/main.js');
 };
 
-ExpressSimpleGenerator.prototype.mvcSetup = function mvcSetup() {
-  if (this.options.mvc) {
-    this.sourceRoot(path.join(__dirname, 'templates', 'mvc'));
-    this.mkdir('controllers');
-    this.mkdir('views');
-    this.mkdir('models');
+ExpressSimpleGenerator.prototype.viewsSetup = function () {
+  this.sourceRoot(path.join(__dirname, 'templates/views'));
+  ['layout', 'index', '404'].forEach(function (file) {
+    this.template(file + '.html', 'views/' + file + '.' + this.viewEngine);
+  }, this);
+};
 
-    this.template('app.js');
-    this.template('controller.js', 'controllers/index.js');
-    this.template('model.js', 'models/index.js');
+ExpressSimpleGenerator.prototype.setupApp = function () {
+  if (this.options.mvc) {
+    this.sourceRoot(path.join(__dirname, 'templates/mvc'));
+    this.directory('.', '.');
+  } else {
+    this.sourceRoot(path.join(__dirname, 'templates/basic'));
+    this.directory('.', '.');
   }
 };
 
-ExpressSimpleGenerator.prototype.projectfiles = function projectfiles() {
+ExpressSimpleGenerator.prototype.writePackageJSONFile = function () {
+  var packageJSON = {
+    name: this.appname,
+    version: '0.0.0',
+    dependencies: {
+      'express': '~3.4.8'
+    },
+    devDependencies: {
+      'grunt': '~0.4.2',
+      'grunt-contrib-jshint': '~0.8.0',
+      'grunt-contrib-watch': '~0.5.3',
+      'grunt-concurrent': '~0.4.3',
+      'grunt-node-inspector': '~0.1.2',
+      'grunt-contrib-cssmin': '~0.8.0'
+    }
+  };
+
+  if (this.options.mvc) {
+    packageJSON.dependencies.mongoose = '~3.8.7';
+  }
+
+  if (this.viewEngine === 'jade') {
+    packageJSON.dependencies.jade = '~1.1.5';
+  } else {
+    packageJSON.dependencies['express-hbs'] = '~0.7.9';
+  }
+
+  switch (this.cssPreprocessor) {
+    case 'less':
+      packageJSON.devDependencies['grunt-contrib-less'] = '~0.9.0';
+    break;
+    case 'scss':
+      packageJSON.devDependencies['grunt-contrib-sass'] = '~0.7.2';
+    break;
+    case 'stylus':
+      packageJSON.devDependencies['grunt-contrib-stylus'] = '~0.12.0';
+    break;
+  }
+
+  this.write('package.json', JSON.stringify(packageJSON, null, 2));
+};
+
+ExpressSimpleGenerator.prototype.writeBowerJSONFile = function () {
+   var bowerJSON = {
+    name: this.appname,
+    version: '0.0.0',
+    dependencies: {
+      'jquery': '~2.1.0',
+      'bootstrap': '~3.1.0'
+    }
+  };
+
+  this.write('bower.json', JSON.stringify(bowerJSON, null, 2));
+};
+
+ExpressSimpleGenerator.prototype.projectfiles = function () {
   this.sourceRoot(path.join(__dirname, 'templates', 'common'));
   this.directory('.', '.');
 };

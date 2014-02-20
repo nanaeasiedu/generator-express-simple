@@ -1,0 +1,8 @@
+<% if (cssPreprocessor === 'less' || cssPreprocessor === 'sass') { %>body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}<% } else { %>body
+  font-family: Arial, Helvetica, sans-serif
+  font-weight: normal
+  -webkit-font-smoothing: antialiased<% } %>
