@@ -10,7 +10,7 @@ If you'd like to get to know Yeoman better and meet some of his friends, [Grunt]
 
 ## Overview
 
-The generator comes with [jquery](http://jquery.com) and [normalize-css](https://github.com/necolas/normalize.css) and optional [Bootstrap](http://getbootstrap.com)
+The generator comes with [jquery](http://jquery.com) and [Bootstrap](http://getbootstrap.com)
 
 Express-generator-simple supports these css preprocessors :
 
@@ -41,7 +41,7 @@ yo express-simple [appname] --mvc
 ```
 appname - optional
 
-The mvc scaffolder has support for only [mongoose](http://mongoosejs.com), a [mongodb](http://mongodb.org) module and [sequelize](http://sequelizejs.com) database modules which you choose when you are prompted to.
+The mvc scaffolder has support for only [mongoose](http://mongoosejs.com), a [mongodb](http://mongodb.org) orm module.
 
 If you do not want any of that, just run
 
@@ -51,22 +51,14 @@ yo express-simple [appname]
 Now your app is ready to be run.
 
 ## Running
-All configurations are in the Gruntfile, to start the server and start developping run, this will start the express app using grunt-nodemon and grunt-concurrent.Watches the files as you develop and runs the tasks.
+All configurations are in the Gruntfile, to start the server and start developing.
+This will start the express app using grunt-nodemon and grunt-concurrent.
+Watches the files as you develop and runs the tasks.
 
-To run the default grunt task use,
+Start
 
 ```shell
 grunt
-```
-
-To run the grunt server task that waches the server files as you develop and restarts the server using nodemon, run this tasks:
-
-```shell
-grunt server
-```
-To debug the application run,
-```shell
-grunt debug
 ```
 
 ## License
