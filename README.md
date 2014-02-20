@@ -21,8 +21,7 @@ Express-generator-simple supports these css preprocessors :
 <br></br>and these html template engines :
 
 - [jade](http://jade-lang.com)
-- [hamljs](https://github.com/visionmedia/haml.js)
-- [underscore](http://documentcloud.github.io/underscore/#template)
+- [handlebars](http://handlebarsjs.com)
 
 ## Installing
 
@@ -33,9 +32,9 @@ npm install -g generator-express-simple
 ```
 
 ## Usage
-generator-express-simple has now support  for mvc-style apps.
-To use the mvc scaffolder, just run
+generator-express-simple has now support for mvc-style apps.
 
+In fact, the default is mvc but you will still be asked.
 
 ```shell
 yo express-simple [appname] --mvc
@@ -53,8 +52,6 @@ Now your app is ready to be run.
 
 ## Running
 All configurations are in the Gruntfile, to start the server and start developping run, this will start the express app using grunt-nodemon and grunt-concurrent.Watches the files as you develop and runs the tasks.
-
-There are configurations that you have to take a look at and configure to suit your needs.
 
 To run the default grunt task use,
 
@@ -75,7 +72,3 @@ grunt debug
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ngenerio/generator-express-simple/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
