@@ -43,7 +43,7 @@ describe('express-simple generator', function () {
     helpers.mockPrompt(this.app, {
       'mvc': true,
       'cssPreprocessor': 'stylus',
-      'viewEngine': 'hbs',
+      'viewEngine': 'handlebars',
       'jsOrCoffee': 'coffeescript'
     });
     this.app.options['skip-install'] = true;
