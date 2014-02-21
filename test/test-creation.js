@@ -19,11 +19,12 @@ describe('express-simple generator', function () {
     }.bind(this));
   });
 
-  it('creates expected files for mvc style app', function (done) {
+  it('creates expected files for mvc style app with coffeescript for Gruntfile', function (done) {
     var expected = [
       // add files you expect to exist here.
        'public/stylus/styles.styl',
        'public/js/main.js',
+       'views/layout.hbs',
        'views/index.hbs',
        'views/404.hbs',
        'routes/index.js',
@@ -31,7 +32,7 @@ describe('express-simple generator', function () {
        'models/user.js',
        'bower.json',
        'package.json',
-       'Gruntfile.js',
+       'Gruntfile.coffee',
        'app.js',
        '.bowerrc',
        '.editorconfig',
@@ -42,7 +43,8 @@ describe('express-simple generator', function () {
     helpers.mockPrompt(this.app, {
       'mvc': true,
       'cssPreprocessor': 'stylus',
-      'viewEngine': 'hbs'
+      'viewEngine': 'hbs',
+      'jsOrCoffee': 'coffeescript'
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
