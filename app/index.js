@@ -14,13 +14,6 @@ function ExpressSimpleGenerator(args, options, config) {
     defaults: path.basename(process.cwd())
   });
 
-  this.option('mvc', {
-    desc: 'create a mvc express-app',
-    type: Boolean,
-    banner: 'yo express-simple --mvc',
-    defaults: true
-  });
-
   this.on('end', function () {
     this.installDependencies({skipInstall: options['skip-install']});
   });

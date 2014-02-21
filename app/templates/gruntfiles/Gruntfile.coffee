@@ -7,7 +7,7 @@ module.exports = ->
       all: ['Gruntfile.js', 'public/js/**/*.js', '**/*.js']
     <%= cssPreprocessor %>:
       files: [{
-        expand: true,
+        expand: true
         cwd: 'public/<%= cssPreprocessor %>'
         src: '**/*.<%= cssExt %>'
         dest: 'public/css'
@@ -30,7 +30,6 @@ module.exports = ->
         options:
           nodeArgs: ['--debug']
           cwd: __dirname
-          cwd: __dirname,
           ignore: ['node_modules/**', 'public/**']
           ext: 'js'
           watch: ['./**']
