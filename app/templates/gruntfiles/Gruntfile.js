@@ -46,8 +46,13 @@ module.exports = function (grunt) {
     },
     watch: {
       options: {
-        files: ['!node_modules/**', '!public/vendor/**', '!**/*.min.*'],
-        livereload: 3006
+        files: ['!node_modules/**', '!public/vendor/**', '!**/*.min.*']
+      },
+      livereload: {
+        options: {
+          livereload: 3006
+        },
+        files: ['public/css/**/*.min.css']
       },
       scripts: {
         files: ['Gruntfile.js', 'public/js/**/*.js', '**/*.js'],
