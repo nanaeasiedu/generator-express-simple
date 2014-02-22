@@ -18,7 +18,7 @@ Express-generator-simple supports these css preprocessors :
 - [sass](http://sass-lang.com)
 - [stylus](http://learnboost.github.io/stylus/)
 
-<br></br>and these html template engines :
+<br></br>and these view engines :
 
 - [jade](http://jade-lang.com)
 - [handlebars](http://handlebarsjs.com)
@@ -32,28 +32,15 @@ npm install -g generator-express-simple
 ```
 
 ## Usage
-generator-express-simple has now support for mvc-style apps.
-
-In fact, the default is mvc but you will still be asked.
-
-```shell
-yo express-simple [appname] --mvc
-```
-appname - optional
-
-The mvc scaffolder has support for only [mongoose](http://mongoosejs.com), a [mongodb](http://mongodb.org) orm module.
-
-If you do not want any of that, just run
-
 ```shell
 yo express-simple [appname]
 ```
+appname - optional
+
 Now your app is ready to be run.
 
 ## Running
 All configurations are in the Gruntfile, to start the server and start developing.
-This will start the express app using grunt-nodemon and grunt-concurrent.
-Watches the files as you develop and runs the tasks.
 
 Start
 
