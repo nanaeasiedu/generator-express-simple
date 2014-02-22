@@ -17,6 +17,9 @@ mongoose.connection.on('error', function () {
 
 var app = express();
 
+app.locals({
+  dev: app.get('env') === 'development'
+});
 /**
  * Express configuration.
  */

@@ -12,6 +12,9 @@ var express  = require('express'),
 
 var app = express();
 
+app.locals({
+  dev: app.get('env') === 'development'
+});
 /**
  * Express configuration.
  */
