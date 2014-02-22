@@ -4,23 +4,26 @@ module.exports = ->
       options:
         ignores: ['node_modules/**', 'public/vendor/**', '**/*.min.js']
         jshintrc: '.jshintrc'
-      all: ['Gruntfile.js', 'public/js/**/*.js', '**/*.js']
+      server: [<% if (options.mvc) { %>'controllers/**/*.js', 'models/**/*.js', <% } %>'routes/**/*.js', 'app.js', 'config.js']
+      client: 'public/**/*.js'
     <%= cssPreprocessor %>:
-      files: [{
-        expand: true
-        cwd: 'public/<%= cssPreprocessor %>'
-        src: '**/*.<%= cssExt %>'
-        dest: 'public/css'
-        ext: '.css'
-      }]
+      src:
+        files: [{
+          expand: true
+          cwd: 'public/<%= cssPreprocessor %>'
+          src: '**/*.<%= cssExt %>'
+          dest: 'public/css'
+          ext: '.css'
+        }]
     cssmin:
-      files: [{
-        expand: true
-        cwd: 'public/css'
-        src: '**/*.css'
-        dest: 'public/css'
-        ext: '.min.css'
-      }]
+      src:
+        files: [{
+          expand: true
+          cwd: 'public/css'
+          src: '**/*.css'
+          dest: 'public/css'
+          ext: '.min.css'
+        }]
     'node-inspector':
       options:
         'save-live-edit': true
@@ -30,33 +33,30 @@ module.exports = ->
         options:
           nodeArgs: ['--debug']
           cwd: __dirname
-          ignore: ['node_modules/**', 'public/**']
+          ignore: ['node_modules/', 'public/']
           ext: 'js'
-          watch: ['./**']
+          watch: [<% if (options.mvc) { %>'controllers/**/*.js', 'models/**/*.js', <% } %>'routes/**/*.js', 'app.js', 'config.js']
           delay: 1
           legacyWatch: true
     watch:
-      options:
-        files: ['!node_modules/**', '!public/vendor/**', '!**/*.min.*']
-      livereload:
+      all:
+        files: ['public/**/*', 'views/**', '!**/node_modules/**', '!public/vendor/**/*', '!**/*.min.*']
         options:
           livereload: 3006
-        files: ['public/css/**/*.min.css']
       scripts:
-        files: ['Gruntfile.js', 'public/js/**/*.js', '**/*.js']
-        tasks: ['jshint']
-        livereload: 3006
-      <%= viewEngine %>:
-        files: ['views/**']
-        options:
-          livereload: 3006
+        files: 'public/js/**/*.js'
+        tasks: 'jshint:client'
+      server:
+        files: [<% if (options.mvc) { %>'controllers/**/*.js', 'models/**/*.js', <% } %>'routes/**/*.js', 'app.js', 'config.js']
+        tasks: 'jshint:server'
       <%= cssExt %>:
         files: ['public/<%= cssPreprocessor %>/**/*.<%= cssExt %>']
         tasks: ['<%= cssPreprocessor %>', 'cssmin']
     concurrent:
-      tasks: ['nodemon', 'node-inspector', 'watch']
+      tasks: ['nodemon:dev', 'node-inspector', 'watch']
       options:
         logConcurrentOutput: true
+        limit: 3
 
   @initConfig config
 

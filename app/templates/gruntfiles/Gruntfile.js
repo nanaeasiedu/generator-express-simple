@@ -5,7 +5,9 @@ module.exports = function (grunt) {
         ignores: ['node_modules/**', 'public/vendor/**', '**/*.min.js'],
         jshintrc: '.jshintrc'
       },
-      all: ['Gruntfile.js', 'public/js/**/*.js', '**/*.js']
+      gruntfile: 'Gruntfile.js',
+      server: [<% if (options.mvc) { %>'controllers/**/*.js', 'models/**/*.js', <% } %>'routes/**/*.js', 'app.js', 'config.js'],
+      client: 'public/**/*.js'
     },
     <%= cssPreprocessor %>: {
       files: [{
@@ -36,33 +38,32 @@ module.exports = function (grunt) {
         options: {
           nodeArgs: ['--debug'],
           cwd: __dirname,
-          ignore: ['node_modules/**', 'public/**'],
+          ignore: ['node_modules/', 'public/'],
           ext: 'js',
-          watch: ['./**'],
+          watch: [<% if (options.mvc) { %>'controllers/**/*.js', 'models/**/*.js', <% } %>'routes/**/*.js', 'app.js', 'config.js'],
           delay: 1,
           legacyWatch: true
         }
       }
     },
     watch: {
-      options: {
-        files: ['!node_modules/**', '!public/vendor/**', '!**/*.min.*']
-      },
-      livereload: {
+      all: {
+        files: ['public/**/*', 'views/**', '!**/node_modules/**', '!public/vendor/**/*', '!**/*.min.*'],
         options: {
           livereload: 3006
-        },
-        files: ['public/css/**/*.min.css']
-      },
-      scripts: {
-        files: ['Gruntfile.js', 'public/js/**/*.js', '**/*.js'],
-        tasks: ['jshint']
-      },
-      <%= viewEngine %>: {
-        files: ['views/**'],
-        options: {
-          livereload: 3006,
         }
+      },
+      gruntfile: {
+        files: 'Gruntfile.js',
+        tasks: 'jshint:gruntfile'
+      }
+      scripts: {
+        files: 'public/js/**/*.js',
+        tasks: 'jshint:client'
+      },
+      server: {
+        files: [<% if (options.mvc) { %>'controllers/**/*.js', 'models/**/*.js', <% } %>'routes/**/*.js', 'app.js', 'config.js'],
+        tasks: 'jshint:server'
       },
       <%= cssExt %>: {
         files: ['public/<%= cssPreprocessor %>/**/*.<%= cssExt %>'],

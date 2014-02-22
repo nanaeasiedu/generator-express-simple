@@ -18,7 +18,7 @@ var app = express();
 app.set('port', config.server.port);<% if (viewEngine === 'hbs') { %>
 app.engine('hbs', hbs.express3());<% } %>
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', <%= viewEngine %>);
+app.set('view engine', '<%= viewEngine %>');
 app.use(express.compress());
 app.use(express.favicon());
 app.use(express.logger('dev'));
