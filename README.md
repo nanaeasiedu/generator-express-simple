@@ -23,6 +23,8 @@ Express-generator-simple supports these css preprocessors :
 - [jade](http://jade-lang.com)
 - [handlebars](http://handlebarsjs.com)
 
+Added support for the Gruntfile in either coffeescript or javascript
+
 ## Installing
 
 install generator-express-simple by running
