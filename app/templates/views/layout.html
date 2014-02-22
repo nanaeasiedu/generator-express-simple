@@ -10,6 +10,8 @@ html
   body
     .container
       block content
+    if dev
+      script(src='http://localhost:3006/livereload.js')
     script(src='/vendor/jquery/jquery.min.js')
     script(src='/js/main.js')<% } else { %><!DOCTYPE html>
 <html lang="en">
@@ -25,7 +27,10 @@ html
   <div class="container">
     {{{body}}}
   </div>
-  <script src="/vendor/jquery/jquery.min.js"></script>
+  {{#if dev}}
+    <script src="http://localhost:3006/livereload.js"></script>
+  {{/if}}
+  <script src="/vendor/jquery/dist/jquery.min.js"></script>
   <script src="/js/main.js"></script>
 </body>
 </html><% } %>

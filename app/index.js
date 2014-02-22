@@ -14,13 +14,6 @@ function ExpressSimpleGenerator(args, options, config) {
     defaults: path.basename(process.cwd())
   });
 
-  this.option('mvc', {
-    desc: 'create a mvc express-app',
-    type: Boolean,
-    banner: 'yo express-simple --mvc',
-    defaults: true
-  });
-
   this.on('end', function () {
     this.installDependencies({skipInstall: options['skip-install']});
   });
@@ -57,6 +50,13 @@ ExpressSimpleGenerator.prototype.askFor = function () {
       message: 'Select view engine you would like to use',
       default: 'jade',
       choices: ['jade', 'handlebars']
+    },
+    {
+      type: 'list',
+      name: 'jsOrCoffee',
+      message: 'Do you want your Gruntfile in javascript or coffeescript',
+      default: 'javascript',
+      choices: ['javascript', 'coffeescript']
     }
   ];
 
@@ -65,6 +65,7 @@ ExpressSimpleGenerator.prototype.askFor = function () {
     this.cssPreprocessor = answers.cssPreprocessor;
     this.cssExt = this.cssPreprocessor === 'stylus' ? 'styl' : (this.cssPreprocessor === 'sass' ? 'scss' : this.cssPreprocessor);
     this.viewEngine = answers.viewEngine === 'handlebars' ? 'hbs' : answers.viewEngine;
+    this.jsOrCoffee = answers.jsOrCoffee === 'javascript' ? 'js' : 'coffee';
     cb();
   }).bind(this);
 
@@ -112,6 +113,7 @@ ExpressSimpleGenerator.prototype.writePackageJSONFile = function () {
       'grunt-contrib-jshint': '~0.8.0',
       'grunt-contrib-watch': '~0.5.3',
       'grunt-concurrent': '~0.4.3',
+      'grunt-nodemon': '~0.2.0',
       'grunt-node-inspector': '~0.1.2',
       'grunt-contrib-cssmin': '~0.8.0'
     }
@@ -160,5 +162,9 @@ ExpressSimpleGenerator.prototype.projectfiles = function () {
   this.directory('.', '.');
 };
 
+ExpressSimpleGenerator.prototype.writeGruntfile = function () {
+  this.sourceRoot(path.join(__dirname, 'templates/gruntfiles'));
+  this.template('Gruntfile.' + this.jsOrCoffee, 'Gruntfile.' + this.jsOrCoffee);
+};
 
 module.exports = ExpressSimpleGenerator;
