@@ -56,7 +56,7 @@ module.exports = function (grunt) {
       gruntfile: {
         files: 'Gruntfile.js',
         tasks: 'jshint:gruntfile'
-      }
+      },
       scripts: {
         files: 'public/js/**/*.js',
         tasks: 'jshint:client'

@@ -115,7 +115,8 @@ ExpressSimpleGenerator.prototype.writePackageJSONFile = function () {
       'grunt-concurrent': '~0.4.3',
       'grunt-nodemon': '~0.2.0',
       'grunt-node-inspector': '~0.1.2',
-      'grunt-contrib-cssmin': '~0.8.0'
+      'grunt-contrib-cssmin': '~0.8.0',
+      'matchdep': '~0.3.0'
     }
   };
 
