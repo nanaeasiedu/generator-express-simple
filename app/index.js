@@ -134,7 +134,7 @@ ExpressSimpleGenerator.prototype.writePackageJSONFile = function () {
     case 'less':
       packageJSON.devDependencies['grunt-contrib-less'] = '~0.9.0';
     break;
-    case 'scss':
+    case 'sass':
       packageJSON.devDependencies['grunt-contrib-sass'] = '~0.7.2';
     break;
     case 'stylus':
