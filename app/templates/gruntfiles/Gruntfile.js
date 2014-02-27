@@ -10,22 +10,26 @@ module.exports = function (grunt) {
       client: 'public/**/*.js'
     },
     <%= cssPreprocessor %>: {
-      files: [{
-        expand: true,
-        cwd: 'public/<%= cssPreprocessor %>',
-        src: '**/*.<%= cssExt %>',
-        dest: 'public/css',
-        ext: '.css'
-      }]
+      src: {
+        files: [{
+          expand: true,
+          cwd: 'public/<%= cssPreprocessor %>',
+          src: '**/*.<%= cssExt %>',
+          dest: 'public/css',
+          ext: '.css'
+        }]
+      }
     },
     cssmin: {
-      files: [{
-        expand: true,
-        cwd: 'public/css',
-        src: '**/*.css',
-        dest: 'public/css',
-        ext: '.min.css'
-      }]
+      src: {
+        files: [{
+          expand: true,
+          cwd: 'public/css',
+          src: '**/*.css',
+          dest: 'public/css',
+          ext: '.min.css'
+        }]
+      }
     },
     'node-inspector': {
       options: {
