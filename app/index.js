@@ -101,66 +101,22 @@ ExpressSimpleGenerator.prototype.setupApp = function () {
   }
 };
 
+ExpressSimpleGenerator.prototype.changeDir = function () {
+  this.sourceRoot(path.join(__dirname, 'templates', 'common'));
+};
+
 ExpressSimpleGenerator.prototype.writePackageJSONFile = function () {
-  var packageJSON = {
-    name: this.appname,
-    version: '0.0.0',
-    dependencies: {
-      'express': '~3.4.8'
-    },
-    devDependencies: {
-      'grunt': '~0.4.2',
-      'grunt-contrib-jshint': '~0.8.0',
-      'grunt-contrib-watch': '~0.5.3',
-      'grunt-concurrent': '~0.4.3',
-      'grunt-nodemon': '~0.2.0',
-      'grunt-node-inspector': '~0.1.2',
-      'grunt-contrib-cssmin': '~0.8.0',
-      'matchdep': '~0.3.0'
-    }
-  };
-
-  if (this.options.mvc) {
-    packageJSON.dependencies.mongoose = '~3.8.7';
-  }
-
-  if (this.viewEngine === 'jade') {
-    packageJSON.dependencies.jade = '~1.1.5';
-  } else {
-    packageJSON.dependencies['express-hbs'] = '~0.7.9';
-  }
-
-  switch (this.cssPreprocessor) {
-    case 'less':
-      packageJSON.devDependencies['grunt-contrib-less'] = '~0.9.0';
-    break;
-    case 'sass':
-      packageJSON.devDependencies['grunt-contrib-sass'] = '~0.7.2';
-    break;
-    case 'stylus':
-      packageJSON.devDependencies['grunt-contrib-stylus'] = '~0.12.0';
-    break;
-  }
-
-  this.write('package.json', JSON.stringify(packageJSON, null, 2));
+  this.template('.package.json', 'package.json');
 };
 
 ExpressSimpleGenerator.prototype.writeBowerJSONFile = function () {
-   var bowerJSON = {
-    name: this.appname,
-    version: '0.0.0',
-    dependencies: {
-      'jquery': '~2.1.0',
-      'bootstrap': '~3.1.0'
-    }
-  };
-
-  this.write('bower.json', JSON.stringify(bowerJSON, null, 2));
+  this.template('.bower.json', 'bower.json');
 };
 
 ExpressSimpleGenerator.prototype.projectfiles = function () {
-  this.sourceRoot(path.join(__dirname, 'templates', 'common'));
-  this.directory('.', '.');
+  ['.bowerrc', '.editorconfig', '.gitignore', '.jshintrc'].forEach(function (file) {
+    this.copy(file, file);
+  }, this);
 };
 
 ExpressSimpleGenerator.prototype.writeGruntfile = function () {

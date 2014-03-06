@@ -1,0 +1,21 @@
+{
+  "name": "<%= _.slugify(appname) %>",
+  "version": "0.0.0",
+  "dependencies": {
+    "express": "~3.4.8",<% if (viewEngine === 'jade') { %>
+    "jade": "~1.1.5",<% } else { %>
+    "express-hbs": "~0.7.9",<% } if (options.mvc) { %>
+    "mongoose": "~3.8.7"<% } %>
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-concurrent": "~0.4.3",
+    "grunt-nodemon": "~0.2.0",
+    "grunt-node-inspector": "~0.1.2",
+    "grunt-contrib-cssmin": "~0.8.0",
+    "matchdep": "~0.3.0",
+    "grunt-contrib-<%= cssPreprocessor %>": <% if (cssPreprocessor === 'less') { %>"~0.9.0"<% } else if (cssPreprocessor === 'sass') { %>"~0.7.2"<% } else { %>"~0.12.0"<% } %>
+  }
+}
