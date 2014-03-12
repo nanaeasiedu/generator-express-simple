@@ -41,6 +41,7 @@ describe('express-simple generator', function () {
     ];
 
     helpers.mockPrompt(this.app, {
+      'expressVersion': '4.x',
       'mvc': true,
       'cssPreprocessor': 'stylus',
       'viewEngine': 'handlebars',

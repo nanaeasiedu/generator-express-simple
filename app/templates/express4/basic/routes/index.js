@@ -1,7 +1,23 @@
-module.exports = function (app) {
-  app.get('/', function (req, res) {
+/**
+ * Module dependencies
+ */
+var express = require('express'),
+    controllers = require('../controller');
+
+/**
+ * the new Router exposed in express 4
+ * the indexRouter handles all requests to the `/` path
+ */
+var indexRouter = express.Router();
+
+/**
+ * this accepts all request methods to the `/` path
+ */
+indexRouter.router('/')
+  .all(function (req, res) {
     res.render('index', {
       title: '<%= _.slugify(appname) %>'
     });
   });
-};
+
+exports.indexRouter = indexRouter;
