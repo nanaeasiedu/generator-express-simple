@@ -11,6 +11,9 @@
   "homepage": "https://github.com/ngenerio/generator-express-simple",
   "bugs": "https://github.com/ngenerio/generator-express-simple/issues",
   "author": "Eugene Asiedu <ngene84@gmail.com> (https://about.me/ngenerio)",
+  "contributors": [
+    "Jarrod Davis <jdavis@student.neumont.edu>"
+  ],
   "main": "app/index.js",
   "repository": {
     "type": "git",
