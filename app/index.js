@@ -31,6 +31,13 @@ ExpressSimpleGenerator.prototype.askFor = function () {
 
   var prompts = [
     {
+      type: 'list',
+      name: 'expressVersion',
+      message: 'Select the express version you want',
+      default: '3.x',
+      choices: ['3.x', '4.x']
+    },
+    {
       type: 'confirm',
       name: 'mvc',
       message: 'Do you want an mvc express app',
@@ -62,6 +69,7 @@ ExpressSimpleGenerator.prototype.askFor = function () {
 
   var answersCallback = (function (answers) {
     this.options.mvc = answers.mvc;
+    this.expressVersion = answers.expressVersion;
     this.cssPreprocessor = answers.cssPreprocessor;
     this.cssExt = this.cssPreprocessor === 'stylus' ? 'styl' : (this.cssPreprocessor === 'sass' ? 'scss' : this.cssPreprocessor);
     this.viewEngine = answers.viewEngine === 'handlebars' ? 'hbs' : answers.viewEngine;
@@ -92,11 +100,13 @@ ExpressSimpleGenerator.prototype.viewsSetup = function () {
 };
 
 ExpressSimpleGenerator.prototype.setupApp = function () {
+  var prefix = 'templates/' + (this.expressVersion === '3.x' ? '' : 'express4/');
+
   if (this.options.mvc) {
-    this.sourceRoot(path.join(__dirname, 'templates/mvc'));
+    this.sourceRoot(path.join(__dirname,  prefix + 'mvc'));
     this.directory('.', '.');
   } else {
-    this.sourceRoot(path.join(__dirname, 'templates/basic'));
+    this.sourceRoot(path.join(__dirname,  prefix + 'basic'));
     this.directory('.', '.');
   }
 };

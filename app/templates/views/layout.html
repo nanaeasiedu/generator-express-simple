@@ -10,7 +10,7 @@ html
   body
     .container
       block content
-    if dev
+    if settings.env == 'development'
       script(src='http://localhost:3006/livereload.js')
     script(src='/vendor/jquery/jquery.min.js')
     script(src='/js/main.js')<% } else { %><!DOCTYPE html>
@@ -27,9 +27,9 @@ html
   <div class="container">
     {{{body}}}
   </div>
-  {{#if dev}}
+  {{#ifvalue settings.env value="development"}}
     <script src="http://localhost:3006/livereload.js"></script>
-  {{/if}}
+  {{/ifvalue}}
   <script src="/vendor/jquery/dist/jquery.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

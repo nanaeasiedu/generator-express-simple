@@ -1,5 +1,19 @@
-var controllers = require('../controllers');
+/**
+ * Module dependencies
+ */
+var express = require('express'),
+    controllers = require('../controller');
 
-module.exports = function (app) {
-  app.get('/', controllers.index);
-};
+/**
+ * the new Router exposed in express 4
+ * the indexRouter handles all requests to the `/` path
+ */
+var indexRouter = express.Router();
+
+/**
+ * this accepts all request methods to the `/` path
+ */
+indexRouter.router('/')
+  .all(controllers.index);
+
+exports.indexRouter = indexRouter;
