@@ -10,7 +10,11 @@ If you'd like to get to know Yeoman better and meet some of his friends, [Grunt]
 
 ## Overview
 
-The generator comes with [jquery](http://jquery.com) and [Bootstrap](http://getbootstrap.com)
+The generator comes with [jquery](http://jquery.com) and [Bootstrap](http://getbootstrap.com).
+
+Newly added functionality is the ability to choose between express 3.x setup and express 4.x.
+
+Get to know more about express 4.x over [here](https://github.com/visionmedia/express/wiki/Migrating-from-3.x-to-4.x) and [here](https://github.com/visionmedia/express/wiki/Migrating-from-3.x-to-4.x).
 
 Express-generator-simple supports these css preprocessors :
 
