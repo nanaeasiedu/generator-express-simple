@@ -17,9 +17,23 @@ mongoose.connection.on('error', function () {
 
 var app = express();
 
-app.locals({
-  dev: app.get('env') === 'development'
-});
+<% if (viewEngine === 'hbs') { %>/**
+ * A simple if condtional helper for handlebars
+ *
+ * Usage:
+ *   {{#ifvalue env value='development'}}
+ *     do something marvellous
+ *   {{/ifvalue}}
+ * For more information, check out this gist: https://gist.github.com/pheuter/3515945
+ */
+hbs.registerHelper('ifvalue', function (conditional, options) {
+  if (options.hash.value === conditional) {
+    return options.fn(this)
+  } else {
+    return options.inverse(this);
+  }
+});<% } %>
+
 /**
  * Express configuration.
  */
