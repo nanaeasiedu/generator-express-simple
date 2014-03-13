@@ -19,7 +19,7 @@ describe('express-simple generator', function () {
     }.bind(this));
   });
 
-  it('creates expected files for mvc style app with coffeescript for Gruntfile', function (done) {
+  it('creates expected files for express 4.x mvc style app with coffeescript for Gruntfile', function (done) {
     var expected = [
       // add files you expect to exist here.
        'public/stylus/styles.styl',
