@@ -13,7 +13,7 @@ var indexRouter = express.Router();
 /**
  * this accepts all request methods to the `/` path
  */
-indexRouter.router('/')
+indexRouter.route('/')
   .all(function (req, res) {
     res.render('index', {
       title: '<%= _.slugify(appname) %>'

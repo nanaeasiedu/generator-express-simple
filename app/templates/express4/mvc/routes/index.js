@@ -13,7 +13,7 @@ var indexRouter = express.Router();
 /**
  * this accepts all request methods to the `/` path
  */
-indexRouter.router('/')
+indexRouter.route('/')
   .all(controllers.index);
 
 exports.indexRouter = indexRouter;
