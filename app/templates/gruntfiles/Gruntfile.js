@@ -44,7 +44,7 @@ module.exports = function (grunt) {
           cwd: __dirname,
           ignore: ['node_modules/', 'public/'],
           ext: 'js',
-          watch: [<% if (options.mvc) { %>'controllers/**/*.js', 'models/**/*.js', <% } %>'routes/**/*.js', 'app.js', 'config.js'],
+          watch: '<%%= jshint.server %>',
           delay: 1,
           legacyWatch: true
         }
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
         tasks: 'jshint:client'
       },
       server: {
-        files: [<% if (options.mvc) { %>'controllers/**/*.js', 'models/**/*.js', <% } %>'routes/**/*.js', 'app.js', 'config.js'],
+        files: '<%%= jshint.server %>',
         tasks: 'jshint:server'
       },
       <%= cssExt %>: {
