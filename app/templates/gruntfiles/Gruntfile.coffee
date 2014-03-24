@@ -35,7 +35,7 @@ module.exports = ->
           cwd: __dirname
           ignore: ['node_modules/', 'public/']
           ext: 'js'
-          watch: '<%%= jshint:server %>'
+          watch: '<%%= jshint.server %>'
           delay: 1
           legacyWatch: true
     watch:
@@ -47,7 +47,7 @@ module.exports = ->
         files: 'public/js/**/*.js'
         tasks: 'jshint:client'
       server:
-        files: '<%%= jshint:server %>'
+        files: '<%%= jshint.server %>'
         tasks: 'jshint:server'
       <%= cssExt %>:
         files: ['public/<%= cssPreprocessor %>/**/*.<%= cssExt %>']
