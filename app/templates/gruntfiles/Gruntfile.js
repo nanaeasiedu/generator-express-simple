@@ -44,11 +44,7 @@ module.exports = function (grunt) {
           cwd: __dirname,
           ignore: ['node_modules/', 'public/'],
           ext: 'js',
-<<<<<<< HEAD
-          watch: '<%%= jshint:server %>',
-=======
           watch: '<%%= jshint.server %>',
->>>>>>> development
           delay: 1,
           legacyWatch: true
         }
@@ -70,11 +66,7 @@ module.exports = function (grunt) {
         tasks: 'jshint:client'
       },
       server: {
-<<<<<<< HEAD
-        files: '<%%= jshint:server %>',
-=======
         files: '<%%= jshint.server %>',
->>>>>>> development
         tasks: 'jshint:server'
       },
       <%= cssExt %>: {
