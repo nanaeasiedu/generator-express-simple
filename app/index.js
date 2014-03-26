@@ -125,7 +125,7 @@ ExpressSimpleGenerator.prototype.writeBowerJSONFile = function () {
 
 ExpressSimpleGenerator.prototype.projectfiles = function () {
   ['.bowerrc', '.editorconfig', '.gitignore', '.jshintrc'].forEach(function (file) {
-    this.copy(file, file);
+    this.copy(file === '.gitignore' ? 'gitignore' : file, file);
   }, this);
 };
 
