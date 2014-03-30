@@ -2,7 +2,7 @@
  * Module dependencies
  */
 var express = require('express'),
-    controllers = require('../controller');
+    controllers = require('../controllers');
 
 /**
  * the new Router exposed in express 4
