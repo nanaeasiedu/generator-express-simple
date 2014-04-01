@@ -23,6 +23,8 @@
     "grunt-node-inspector": "~0.1.2",
     "grunt-contrib-cssmin": "~0.8.0",
     "matchdep": "~0.3.0",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-concat": "~0.4.0",
     "grunt-contrib-<%= cssPreprocessor %>": <% if (cssPreprocessor === 'less') { %>"~0.9.0"<% } else if (cssPreprocessor === 'sass') { %>"~0.7.2"<% } else { %>"~0.12.0"<% } %>
   }
 }

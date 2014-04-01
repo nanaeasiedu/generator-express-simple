@@ -5,23 +5,21 @@ html
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge, chrome=1')
     meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-    link(rel='stylesheet', href='/vendor/bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/css/styles.min.css')
+    link(rel='stylesheet', href='/css/app.styles.min.css')
   body
     .container
       block content
     if settings.env == 'development'
       script(src='http://localhost:3006/livereload.js')
     script(src='/vendor/jquery/jquery.min.js')
-    script(src='/js/main.js')<% } else { %><!DOCTYPE html>
+    script(src='/js/app.min.js')<% } else { %><!DOCTYPE html>
 <html lang="en">
 <head>
   <title>{{title}}</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="/css/styles.css"/>
+  <link rel="stylesheet" href="/css/app.styles.min.css"/>
 </head>
 <body>
   <div class="container">
@@ -30,7 +28,6 @@ html
   {{#ifvalue settings.env value="development"}}
     <script src="http://localhost:3006/livereload.js"></script>
   {{/ifvalue}}
-  <script src="/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="/js/main.js"></script>
+  <script src="/js/app.min.js"></script>
 </body>
 </html><% } %>

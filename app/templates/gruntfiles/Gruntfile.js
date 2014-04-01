@@ -9,6 +9,27 @@ module.exports = function (grunt) {
       server: [<% if (options.mvc) { %>'controllers/**/*.js', 'models/**/*.js', <% } %>'routes/**/*.js', 'app.js', 'config.js'],
       client: 'public/**/*.js'
     },
+    concat: {
+      css: {
+        // add your css files over here to concatenate all css files
+        // let's save our site users some bandwith
+        files: {
+          src: ['public/vendor/bootstrap/dist/css/bootstrap.min.css', 'public/css/styles.min.css'],
+          dest: 'public/css/app.styles.min.css'
+        }
+      }
+    },
+    uglify: {
+      options: {
+        mangle: {
+          except: ['jQuery']
+        }
+      },
+      target: {
+        // add your js files over here to minify them into one javascript source file
+        'public/js/app.min.js': ['public/vendor/jquery/dist/jquery.min.js', 'public/vendor/bootstrap/dist/js/bootstrap.min.js', 'public/js/main.js']
+      }
+    },
     <%= cssPreprocessor %>: {
       src: {
         files: [{
@@ -63,7 +84,7 @@ module.exports = function (grunt) {
       },
       scripts: {
         files: 'public/js/**/*.js',
-        tasks: 'jshint:client'
+        tasks: ['jshint:client', 'uglify']
       },
       server: {
         files: '<%%= jshint.server %>',
@@ -71,7 +92,7 @@ module.exports = function (grunt) {
       },
       <%= cssExt %>: {
         files: ['public/<%= cssPreprocessor %>/**/*.<%= cssExt %>'],
-        tasks: ['<%= cssPreprocessor %>', 'cssmin']
+        tasks: ['<%= cssPreprocessor %>', 'cssmin', 'concat:css']
       }
     },
     concurrent: {
