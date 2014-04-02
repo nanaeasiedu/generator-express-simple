@@ -19,14 +19,14 @@ describe('express-simple generator', function () {
     }.bind(this));
   });
 
-  it('creates expected files for express 4.x basic style app with coffeescript for Gruntfile', function (done) {
+  it('creates expected files for express 4.x basic style app with coffeescript for Gruntfile and ejs for view engine', function (done) {
     var expected = [
       // add files you expect to exist here.
        'public/stylus/styles.styl',
        'public/js/main.js',
-       'views/layout.hbs',
-       'views/index.hbs',
-       'views/404.hbs',
+       'views/layout.ejs',
+       'views/index.ejs',
+       'views/404.ejs',
        'routes/index.js',
        'bower.json',
        'package.json',
@@ -42,7 +42,7 @@ describe('express-simple generator', function () {
       'expressVersion': '4.x',
       'mvc': false,
       'cssPreprocessor': 'stylus',
-      'viewEngine': 'handlebars',
+      'viewEngine': 'ejs',
       'jsOrCoffee': 'coffeescript'
     });
     this.app.options['skip-install'] = true;
