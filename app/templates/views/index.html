@@ -2,7 +2,7 @@
 
 block content
   h1= title
-  //content goes here<% } else { %>{{!< layout}}
+  //content goes here<% } else if (viewEngine === 'hbs') { %>{{!< layout}}
   <h1>{{title}}</h1>
-<% } %>
+<% } else { %><h1><%%= title %></h1><% } %>
 

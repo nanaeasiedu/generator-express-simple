@@ -21,6 +21,7 @@ Express-generator-simple supports these css preprocessors :
 - [less](http://lesscss.org)
 - [sass](http://sass-lang.com)
 - [stylus](http://learnboost.github.io/stylus/)
+- [ejs](https://github.com/visionmedia/ejs)
 
 <br></br>and these view engines :
 
@@ -53,6 +54,14 @@ Start
 ```shell
 grunt
 ```
+## Contributing
+Fork :fork_and_knife: the repo or whatever you want to do then:
+  - if it is a fix,
+    - create a new branch with the naming convention following this style: fix/[fixname] or fix-[fixname]
+  - if it is a new feature,
+    - create a new branch with the naming convention following this style: feature/[featurename] or feature-[featurename]
+
+**Make sure the tests are passing and send a pull request.**
 
 ## License
 

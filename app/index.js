@@ -56,7 +56,7 @@ ExpressSimpleGenerator.prototype.askFor = function () {
       name: 'viewEngine',
       message: 'Select view engine you would like to use',
       default: 'jade',
-      choices: ['jade', 'handlebars']
+      choices: ['jade', 'handlebars', 'ejs']
     },
     {
       type: 'list',
