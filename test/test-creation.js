@@ -19,14 +19,14 @@ describe('express-simple generator', function () {
     }.bind(this));
   });
 
-  it('creates expected files for express 4.x basic style app with coffeescript for Gruntfile and ejs for view engine', function (done) {
+  it('creates expected files for express 4.x mvc style app with coffeescript for Gruntfile and jade for view engine', function (done) {
     var expected = [
       // add files you expect to exist here.
        'public/stylus/styles.styl',
        'public/js/main.js',
-       'views/layout.ejs',
-       'views/index.ejs',
-       'views/404.ejs',
+       'views/layout.jade',
+       'views/index.jade',
+       'views/404.jade',
        'routes/index.js',
        'bower.json',
        'package.json',
@@ -40,9 +40,9 @@ describe('express-simple generator', function () {
 
     helpers.mockPrompt(this.app, {
       'expressVersion': '4.x',
-      'mvc': false,
+      'mvc': true,
       'cssPreprocessor': 'stylus',
-      'viewEngine': 'ejs',
+      'viewEngine': 'jade',
       'jsOrCoffee': 'coffeescript'
     });
     this.app.options['skip-install'] = true;
