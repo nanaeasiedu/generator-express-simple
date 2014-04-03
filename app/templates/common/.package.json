@@ -10,7 +10,7 @@
     "method-override": "~1.0.0",
     "errorhandler": "~1.0.0",<% } else { %>
     "express": "~3.4.8",<% } if (viewEngine === 'jade') { %>
-    "jade": "~1.1.5",<% } else if (viewEngine === 'hbs'){ %>
+    "jade": "~1.1.5"<% } else if (viewEngine === 'hbs'){ %>
     "express-hbs": "~0.7.9"<% } else { %>
     "ejs": "~1.0.0"<% } if (options.mvc) { %>,
     "mongoose": "~3.8.7"<% } %>
