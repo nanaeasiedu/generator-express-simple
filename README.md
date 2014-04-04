@@ -21,12 +21,12 @@ Express-generator-simple supports these css preprocessors :
 - [less](http://lesscss.org)
 - [sass](http://sass-lang.com)
 - [stylus](http://learnboost.github.io/stylus/)
-- [ejs](https://github.com/visionmedia/ejs)
 
 <br></br>and these view engines :
 
 - [jade](http://jade-lang.com)
 - [handlebars](http://handlebarsjs.com)
+- [ejs](https://github.com/visionmedia/ejs)
 
 Added support for the Gruntfile in either coffeescript or javascript
 
