@@ -60,8 +60,15 @@ ExpressSimpleGenerator.prototype.askFor = function () {
     },
     {
       type: 'list',
-      name: 'jsOrCoffee',
-      message: 'Do you want your Gruntfile in javascript or coffeescript',
+      name: 'buildTool',
+      message: 'Select the build tool you want to use for this project',
+      default: 'grunt',
+      choices: ['grunt', 'gulp']
+    },
+    {
+      type: 'list',
+      name: 'buildToolLanguage',
+      message: 'Select the language you want to use for the build tool',
       default: 'javascript',
       choices: ['javascript', 'coffeescript']
     }
@@ -73,7 +80,8 @@ ExpressSimpleGenerator.prototype.askFor = function () {
     this.cssPreprocessor = answers.cssPreprocessor;
     this.cssExt = this.cssPreprocessor === 'stylus' ? 'styl' : (this.cssPreprocessor === 'sass' ? 'scss' : this.cssPreprocessor);
     this.viewEngine = answers.viewEngine === 'handlebars' ? 'hbs' : answers.viewEngine;
-    this.jsOrCoffee = answers.jsOrCoffee === 'javascript' ? 'js' : 'coffee';
+    this.buildTool = answers.buildTool;
+    this.buildToolLanguage = answers.buildToolLanguage === 'javascript' ? 'js' : 'coffee';
     cb();
   }).bind(this);
 
@@ -129,9 +137,19 @@ ExpressSimpleGenerator.prototype.projectfiles = function () {
   }, this);
 };
 
-ExpressSimpleGenerator.prototype.writeGruntfile = function () {
-  this.sourceRoot(path.join(__dirname, 'templates/gruntfiles'));
-  this.template('Gruntfile.' + this.jsOrCoffee, 'Gruntfile.' + this.jsOrCoffee);
+// working on using either gulp or grunt as the development and build tool
+// there's a lot of work to be done
+ExpressSimpleGenerator.prototype.writeBuildFile = function () {
+  this.sourceRoot(path.join(__dirname, 'templates/' + this.buildTool + 'files'));
+
+  if (this.buildToolLanguage === 'grunt') {
+    this.template('Gruntfile.' + this.buildToolLanguage, 'Gruntfile.' + this.buildToolLanguage);
+  } else {
+    if (this.buildToolLanguage === 'coffee') {
+      this.template('_gulpfile.js', 'gulpfile.js');
+    }
+    this.template('gulpfile.' + this.buildToolLanguage, 'gulpfile.' + this.buildToolLanguage);
+  }
 };
 
 module.exports = ExpressSimpleGenerator;

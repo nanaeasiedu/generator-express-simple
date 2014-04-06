@@ -19,7 +19,7 @@ describe('express-simple generator', function () {
     }.bind(this));
   });
 
-  it('creates expected files for express 4.x mvc style app with coffeescript for Gruntfile and jade for view engine', function (done) {
+  it('creates expected files for express 4.x mvc style app with coffeescript as the language for the build tool which is gulp and jade for view engine', function (done) {
     var expected = [
       // add files you expect to exist here.
        'public/stylus/styles.styl',
@@ -30,7 +30,8 @@ describe('express-simple generator', function () {
        'routes/index.js',
        'bower.json',
        'package.json',
-       'Gruntfile.coffee',
+       'gulpfile.js',
+       'gulpfile.coffee',
        'app.js',
        '.bowerrc',
        '.editorconfig',
@@ -43,7 +44,8 @@ describe('express-simple generator', function () {
       'mvc': true,
       'cssPreprocessor': 'stylus',
       'viewEngine': 'jade',
-      'jsOrCoffee': 'coffeescript'
+      'buildTool': 'gulp',
+      'buildToolLanguage': 'coffeescript'
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {

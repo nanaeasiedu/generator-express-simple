@@ -7,7 +7,7 @@ module.exports = function (grunt) {
       },
       gruntfile: 'Gruntfile.js',
       server: [<% if (options.mvc) { %>'controllers/**/*.js', 'models/**/*.js', <% } %>'routes/**/*.js', 'app.js', 'config.js'],
-      client: 'public/**/*.js'
+      client: 'public/js/**/*.js'
     },
     concat: {
       css: {
