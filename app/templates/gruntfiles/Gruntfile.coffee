@@ -5,7 +5,7 @@ module.exports = ->
         ignores: ['node_modules/**', 'public/vendor/**', '**/*.min.js']
         jshintrc: '.jshintrc'
       server: [<% if (options.mvc) { %>'controllers/**/*.js', 'models/**/*.js', <% } %>'routes/**/*.js', 'app.js', 'config.js']
-      client: 'public/**/*.js'
+      client: 'public/js/**/*.js'
     concat:
       css:
         files:
