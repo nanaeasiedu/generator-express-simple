@@ -29,7 +29,7 @@ gulp.task '<%= cssPreprocessor %>', ->
     .pipe gulp.dest './public/css'
 
 gulp.task 'dev'. ->
-  nomdeon
+  nodemon
     script: 'app.js'
     nodeArgs: ['--debug']
     cwd: __dirname
