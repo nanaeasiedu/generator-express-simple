@@ -70,8 +70,6 @@ gulp.task 'dev', ->
     legacyWatch: true
 
 gulp.task 'watch', ->
-  server = livereload()
-
   gulp.watch paths.server, ['lintserver']
   gulp.watch paths.client, ['lintclient']
   gulp.watch paths.client, ['buildJs']
@@ -79,7 +77,7 @@ gulp.task 'watch', ->
   gulp
     .src ['./views/**/*.<%= viewEngine %>', './public/css/**/*.min.css', './public/js/**/*.min.js']
     .pipe watch()
-    .pipe server
+    .pipe livereload()
 
 gulp.task 'lint' ['lintserver', 'lintclient']
 gulp.task 'buildCss' ['<%= cssPreprocessor %>', 'css', 'concatCss']

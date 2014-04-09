@@ -80,8 +80,6 @@ gulp.task('dev', function () {
 });
 
 gulp.task('watch', function () {
-  var server = livereload();
-
   gulp.watch(paths.server, ['lintserver']);
   gulp.watch(paths.client, ['lintclient']);
   gulp.watch(paths.client, ['buildJs']);
@@ -89,7 +87,7 @@ gulp.task('watch', function () {
   gulp
     .src(['./views/**/*.<%= viewEngine %>', './public/css/**/*.min.css', './public/js/**/*.min.js'])
     .pipe(watch())
-    .pipe(server);
+    .pipe(livereload());
 });
 
 gulp.task('lint', ['lintserver', 'lintclient']);
