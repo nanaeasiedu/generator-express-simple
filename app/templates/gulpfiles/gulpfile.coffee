@@ -21,21 +21,21 @@ paths =
 # open an issue at https://github/com/ngenerio/generator-express-simple
 # It can be made simpler
 
-# This tasks lints the javascript server files
+# Lint the javascript server files
 gulp.task 'lintserver', ->
   gulp
     .src paths.server
     .pipe jshint '.jshintrc'
     .pipe jshint.reporter 'jshint-stylish'
 
-# This tasks lints the javascript client files
+# Lint the javascript client files
 gulp.task 'lintclient', ->
   gulp
     .src paths.client
     .pipe jshint '.jshintrc'
     .pipe jshint.reporter 'jshint-stylish'
 
-# This tasks uglifies the client/frontend javascript files
+# Uglify the client/frontend javascript files
 gulp.task 'uglify', ->
   gulp
     .src paths.client
@@ -43,7 +43,7 @@ gulp.task 'uglify', ->
     .pipe rename suffix: '.min'
     .pipe gulp.dest './public/js'
 
-# This task concats the built javascript files from the uglify task with the vendor/lib javascript files into one file
+# Concat the built javascript files from the uglify task with the vendor/lib javascript files into one file
 # Let's save the users some bandwith
 gulp.task 'concatJs', ->
   gulp
@@ -51,14 +51,14 @@ gulp.task 'concatJs', ->
     .pipe concat 'app.min.js'
     .pipe gulp.dest './public/js'
 
-# This task preprocesses the <%= cssPreprocessor %> files into css files
+# Preprocess the <%= cssPreprocessor %> files into css files
 gulp.task '<%= cssPreprocessor %>', ->
   gulp
     .src './public/<%= cssPreprocessor %>/**/*.<%= cssExt %>'
     .pipe <%= cssPreprocessor %>()
     .pipe gulp.dest './public/css'
 
-# This task will minify the css files to reduce the size of the files
+# Minify the css files to reduce the size of the files
 # To avoid this task, import all the other <%= cssPreprocessor %> files into one file
 # and rather process that file into a single file and jump straight to concatenation
 # You can learn more about this from the twitter bootstrap project
@@ -69,14 +69,14 @@ gulp.task 'css', ->
     .pipe rename suffix: '.min'
     .pipe gulp.dest './public/css'
 
-# This task concat all the css files
+# Concat all the css files
 gulp.task 'concatCss', ->
   gulp
     .src ['./public/vendor/bootstrap/dist/css/bootstrap.min.css,' './public/css/**/*.min.css']
     .pipe concat 'app.styles.min.css'
     .pipe gulp.dest './public/css'
 
-# This task will start the server, watch the server files and restart it when any of that file changes
+# Start the server, watch the server files and restart it when any of that file changes
 gulp.task 'dev', ->
   nodemon
     script: 'app.js'
@@ -88,7 +88,7 @@ gulp.task 'dev', ->
     delay: 1
     legacyWatch: true
 
-# This task watches the various files and runs their respective files
+# Watch the various files and runs their respective tasks
 gulp.task 'watch', ->
   gulp.watch paths.server, ['lintserver']
   gulp.watch paths.client, ['lintclient']
