@@ -56,11 +56,11 @@ Start
 grunt
 ```
 ## Contributing
-Fork :fork_and_knife: the repo or whatever you want to do then:
-  - if it is a fix,
-    - create a new branch with the naming convention following this style: fix/[fixname] or fix-[fixname]
-  - if it is a new feature,
-    - create a new branch with the naming convention following this style: feature/[featurename] or feature-[featurename]
+1. Fork it
+2. Create your feature branch ```git checkout -b feature-name```
+3. Commit your changes ```git commit -am "add your feature"```
+4. Push to the branch ```git push origin feature-name```
+5. Create pull request
 
 **Make sure the tests are passing and send a pull request.**
 
