@@ -29,6 +29,7 @@ Express-generator-simple supports these css preprocessors :
 - [ejs](https://github.com/visionmedia/ejs)
 
 Added support for the Gruntfile in either coffeescript or javascript
+Currently working on choosing between gulp and grunt as the build tool
 
 ## Installing
 
