@@ -27,6 +27,16 @@
     "grunt-contrib-uglify": "~0.4.0",
     "grunt-contrib-concat": "~0.4.0",
     "grunt-contrib-<%= cssPreprocessor %>": <% if (cssPreprocessor === 'less') { %>"~0.9.0"<% } else if (cssPreprocessor === 'sass') { %>"~0.7.2"<% } else { %>"~0.12.0"<% } } else { %>
-    "gulp": "~3.6.0"<% } %>
+    "gulp": "~3.6.0",
+    "gulp-<%= cssPreprocessor %>": <% if (cssPreprocessor === 'less') { %>"~1.2.3"<% } else if (cssPreprocessor === 'sass') { %>"~0.7.1"<% } else { %>"~0.2.0"<% } %>,
+    "gulp-concat": "~2.2.0",
+    "gulp-minify-css": "~0.3.1",
+    "gul-rename": "~1.2.0",
+    "gulp-uglify": "~0.2.1",
+    "gulp-jshint": "~1.5.3",
+    "gulp-nodemon": "~1.0.2",
+    "gulp-livereload": "~1.2.0",
+    "gulp-watch": "~0.5.4",
+    "jshint-stylish": "~0.5.1"<% } %>
   }
 }
