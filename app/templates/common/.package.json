@@ -37,6 +37,6 @@
     "gulp-nodemon": "~1.0.2",
     "gulp-livereload": "~1.2.0",
     "gulp-watch": "~0.5.4",
-    "jshint-stylish": "~0.5.1"<% } %>
+    "jshint-stylish": "~0.1.5"<% } %>
   }
 }
