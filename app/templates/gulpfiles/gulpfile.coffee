@@ -24,39 +24,39 @@ paths =
 # Lint the javascript server files
 gulp.task 'lintserver', ->
   gulp
-    .src paths.server
-    .pipe jshint '.jshintrc'
-    .pipe jshint.reporter 'jshint-stylish'
+    .src(paths.server)
+    .pipe(jshint '.jshintrc')
+    .pipe(jshint.reporter 'jshint-stylish')
 
 # Lint the javascript client files
 gulp.task 'lintclient', ->
   gulp
-    .src paths.client
-    .pipe jshint '.jshintrc'
-    .pipe jshint.reporter 'jshint-stylish'
+    .src(paths.client)
+    .pipe(jshint '.jshintrc')
+    .pipe(jshint.reporter 'jshint-stylish')
 
 # Uglify the client/frontend javascript files
 gulp.task 'uglify', ->
   gulp
-    .src paths.client
-    .pipe uglify()
-    .pipe rename suffix: '.min'
-    .pipe gulp.dest './public/js'
+    .src(paths.client)
+    .pipe(uglify())
+    .pipe(rename suffix: '.min')
+    .pipe(gulp.dest './public/js')
 
 # Concat the built javascript files from the uglify task with the vendor/lib javascript files into one file
 # Let's save the users some bandwith
 gulp.task 'concatJs', ->
   gulp
-    .src ['./public/vendor/jquery/dist/jquery.min.js', './public/vendor/bootstrap/dist/js/bootstrap.min.js', './public/js/**/*.min.js']
-    .pipe concat 'app.min.js'
-    .pipe gulp.dest './public/js'
+    .src(['./public/vendor/jquery/dist/jquery.min.js', './public/vendor/bootstrap/dist/js/bootstrap.min.js', './public/js/**/*.min.js'])
+    .pipe(concat 'app.min.js')
+    .pipe(gulp.dest './public/js')
 
 # Preprocess the <%= cssPreprocessor %> files into css files
 gulp.task '<%= cssPreprocessor %>', ->
   gulp
-    .src './public/<%= cssPreprocessor %>/**/*.<%= cssExt %>'
-    .pipe <%= cssPreprocessor %>()
-    .pipe gulp.dest './public/css'
+    .src('./public/<%= cssPreprocessor %>/**/*.<%= cssExt %>')
+    .pipe(<%= cssPreprocessor %>())
+    .pipe(gulp.dest './public/css')
 
 # Minify the css files to reduce the size of the files
 # To avoid this task, import all the other <%= cssPreprocessor %> files into one file
@@ -64,17 +64,17 @@ gulp.task '<%= cssPreprocessor %>', ->
 # You can learn more about this from the twitter bootstrap project
 gulp.task 'css', ->
   gulp
-    .src ['./public/css/**/*.css', '!./public/css/**/*.min.css']
-    .pipe minifyCss()
-    .pipe rename suffix: '.min'
-    .pipe gulp.dest './public/css'
+    .src(['./public/css/**/*.css', '!./public/css/**/*.min.css'])
+    .pipe(minifyCss())
+    .pipe(rename suffix: '.min')
+    .pipe(gulp.dest './public/css')
 
 # Concat all the css files
 gulp.task 'concatCss', ->
   gulp
-    .src ['./public/vendor/bootstrap/dist/css/bootstrap.min.css,' './public/css/**/*.min.css']
-    .pipe concat 'app.styles.min.css'
-    .pipe gulp.dest './public/css'
+    .src(['./public/vendor/bootstrap/dist/css/bootstrap.min.css', './public/css/**/*.min.css'])
+    .pipe(concat 'app.styles.min.css')
+    .pipe(gulp.dest './public/css')
 
 # Start the server, watch the server files and restart it when any of that file changes
 gulp.task 'dev', ->
@@ -95,11 +95,11 @@ gulp.task 'watch', ->
   gulp.watch paths.client, ['buildJs']
   gulp.watch './public/<%= cssPreprocessor %>/**/*.<%= cssExt %>', ['buildCss']
   gulp
-    .src ['./views/**/*.<%= viewEngine %>', './public/css/**/*.min.css', './public/js/**/*.min.js']
-    .pipe watch()
-    .pipe livereload()
+    .src(['./views/**/*.<%= viewEngine %>', './public/css/**/*.min.css', './public/js/**/*.min.js'])
+    .pipe(watch())
+    .pipe(livereload())
 
-gulp.task 'lint' ['lintserver', 'lintclient']
-gulp.task 'buildCss' ['<%= cssPreprocessor %>', 'css', 'concatCss']
-gulp.task 'buildJs' ['uglifyJs', 'concatJs']
+gulp.task 'lint', ['lintserver', 'lintclient']
+gulp.task 'buildCss', ['<%= cssPreprocessor %>', 'css', 'concatCss']
+gulp.task 'buildJs', ['uglifyJs', 'concatJs']
 gulp.task 'default', ['lint', 'buildCss', 'buildJs', 'watch']
