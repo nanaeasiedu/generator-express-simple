@@ -101,5 +101,5 @@ gulp.task 'watch', ->
 
 gulp.task 'lint', ['lintserver', 'lintclient']
 gulp.task 'buildCss', ['<%= cssPreprocessor %>', 'css', 'concatCss']
-gulp.task 'buildJs', ['uglifyJs', 'concatJs']
+gulp.task 'buildJs', ['uglify', 'concatJs']
 gulp.task 'default', ['lint', 'buildCss', 'buildJs', 'watch']
