@@ -47,7 +47,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res) {
   res.status(404).render('404', {title: 'Not Found :('});
 });
-app.use(express.errorHandler());
+
+if (app.get('env') === 'development') {
+  app.use(express.errorHandler());
+}
 
 routes(app);
 

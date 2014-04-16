@@ -53,9 +53,11 @@ app
   .use(routes.indexRouter)
   .use(function (req, res) {
     res.status(404).render('404', {title: 'Not Found :('});
-  })
-  .use(errorHandler());
+  });
 
+if (app.get('env') === 'development') {
+  app.use(errorHandler());
+}
 
 app.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
