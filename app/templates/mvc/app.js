@@ -28,7 +28,7 @@ var app = express();
  */
 hbs.registerHelper('ifvalue', function (conditional, options) {
   if (options.hash.value === conditional) {
-    return options.fn(this)
+    return options.fn(this);
   } else {
     return options.inverse(this);
   }
