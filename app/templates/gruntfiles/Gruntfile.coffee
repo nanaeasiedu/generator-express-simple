@@ -56,7 +56,7 @@ module.exports = ->
       all:
         files: ['public/**/*', 'views/**', '!**/node_modules/**', '!public/vendor/**/*', '!**/*.min.*']
         options:
-          livereload: 3006
+          livereload: true
       scripts:
         files: 'public/js/**/*.js'
         tasks: ['jshint:client', 'uglify']

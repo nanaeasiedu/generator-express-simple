@@ -14,7 +14,7 @@ html
     .container
       block content
     if settings.env == 'development'
-      script(src='http://localhost:3006/livereload.js')
+      script(src='http://localhost:35729/livereload.js')
     script(src='/js/app.min.js')<% } else if (viewEngine === 'hbs') { %><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +36,7 @@ html
     {{{body}}}
   </div>
   {{#ifvalue settings.env value="development"}}
-    <script src="http://localhost:3006/livereload.js"></script>
+    <script src="http://localhost:35729/livereload.js"></script>
   {{/ifvalue}}
   <script src="/js/app.min.js"></script>
 </body>
@@ -61,7 +61,7 @@ html
     <%%- body %>
   </div>
   <%% if (settings.env === "development") { %>
-    <script src="http://localhost:3006/livereload.js"></script>
+    <script src="http://localhost:35729/livereload.js"></script>
   <%% } %>
   <script src="/js/app.min.js"></script>
 </body>
