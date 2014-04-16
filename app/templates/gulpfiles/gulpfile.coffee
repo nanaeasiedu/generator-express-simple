@@ -47,7 +47,7 @@ gulp.task 'uglify', ->
 # Let's save the users some bandwith
 gulp.task 'concatJs', ->
   gulp
-    .src(['./public/vendor/jquery/dist/jquery.min.js', './public/vendor/bootstrap/dist/js/bootstrap.min.js', './public/js/**/*.min.js'])
+    .src(['./public/vendor/jquery/dist/jquery.min.js', './public/vendor/bootstrap/dist/js/bootstrap.min.js', './public/js/main.min.js'])
     .pipe(concat 'app.min.js')
     .pipe(gulp.dest './public/js')
 
@@ -72,7 +72,7 @@ gulp.task 'css', ->
 # Concat all the css files
 gulp.task 'concatCss', ->
   gulp
-    .src(['./public/vendor/bootstrap/dist/css/bootstrap.min.css', './public/css/**/*.min.css'])
+    .src(['./public/vendor/bootstrap/dist/css/bootstrap.min.css', './public/css/styles.min.css'])
     .pipe(concat 'app.styles.min.css')
     .pipe(gulp.dest './public/css')
 
