@@ -1,4 +1,4 @@
-module.exports = ->
+,module.exports = ->
   config=
     jshint:
       options:
@@ -77,4 +77,4 @@ module.exports = ->
   # Load the tasks
 
   require('matchdep').filterDev('grunt-*').forEach @loadNpmTasks
-  @registerTask 'default', ['jshint', '<%= cssPreprocessor %>', 'cssmin', 'concurrent']
+  @registerTask 'default', ['jshint', 'uglify', '<%= cssPreprocessor %>', 'cssmin', 'concat:css', 'concurrent']
