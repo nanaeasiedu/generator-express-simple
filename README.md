@@ -48,12 +48,15 @@ appname - optional
 Now your app is ready to be run.
 
 ## Running
-All configurations are in the Gruntfile, to start the server and start developing.
-
-Start
+Depending on the build tool you choose, you may have to run either
 
 ```shell
 grunt
+```
+or
+
+```shell
+gulp
 ```
 ## Contributing
 1. Fork it
