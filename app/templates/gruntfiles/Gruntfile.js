@@ -57,20 +57,6 @@ module.exports = function (grunt) {
         'save-live-edit': true
       }
     },
-    nodemon: {
-      dev: {
-        script: 'app.js',
-        options: {
-          nodeArgs: ['--debug'],
-          cwd: __dirname,
-          ignore: ['node_modules/', 'public/'],
-          ext: 'js',
-          watch: '<%%= jshint.server %>',
-          delay: 1,
-          legacyWatch: true
-        }
-      }
-    },
     watch: {
       all: {
         files: ['public/**/*', 'views/**', '!**/node_modules/**', '!public/vendor/**/*', '!**/*.min.*'],
@@ -96,7 +82,7 @@ module.exports = function (grunt) {
       }
     },
     concurrent: {
-      tasks: ['nodemon', 'node-inspector', 'watch'],
+      tasks: ['node-inspector', 'watch'],
       options: {
         logConcurrentOutput: true
       }

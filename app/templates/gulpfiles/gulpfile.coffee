@@ -76,18 +76,6 @@ gulp.task 'concatCss', ->
     .pipe(concat 'app.styles.min.css')
     .pipe(gulp.dest './public/css')
 
-# Start the server, watch the server files and restart it when any of that file changes
-gulp.task 'dev', ->
-  nodemon
-    script: 'app.js'
-    nodeArgs: ['--debug']
-    cwd: __dirname
-    ignore: ['node_modules/', 'public/']
-    ext: 'js'
-    watch: paths.server
-    delay: 1
-    legacyWatch: true
-
 # Watch the various files and runs their respective tasks
 gulp.task 'watch', ->
   gulp.watch paths.server, ['lintserver']
@@ -102,4 +90,4 @@ gulp.task 'watch', ->
 gulp.task 'lint', ['lintserver', 'lintclient']
 gulp.task 'buildCss', ['<%= cssPreprocessor %>', 'css', 'concatCss']
 gulp.task 'buildJs', ['uglify', 'concatJs']
-gulp.task 'default', ['lint', 'buildCss', 'buildJs', 'dev', 'watch']
+gulp.task 'default', ['lint', 'buildCss', 'buildJs', 'watch']

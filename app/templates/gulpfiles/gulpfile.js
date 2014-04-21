@@ -7,8 +7,7 @@ var gulp = require('gulp'),
     minifyCss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
     concat =  require('gulp-concat'),
-    livereload = require('gulp-livereload'),
-    nodemon = require('gulp-nodemon');
+    livereload = require('gulp-livereload');
 
 // config to hold the path files
 var paths = {
@@ -84,20 +83,6 @@ gulp.task('concatCss', function () {
     .pipe(gulp.dest('./public/css'));
 });
 
-// Start the server, watch the server files and restart it when any of that file changes
-gulp.task('dev', function () {
-  nodemon({
-    script: 'app.js',
-    nodeArgs: ['--debug'],
-    cwd: __dirname,
-    ignore: ['node_modules/', 'public/'],
-    ext: 'js',
-    watch: paths.server,
-    delay: 1,
-    legacyWatch: true
-  });
-});
-
 // Watch the various files and runs their respective tasks
 gulp.task('watch', function () {
   gulp.watch(paths.server, ['lintserver']);
@@ -113,4 +98,4 @@ gulp.task('watch', function () {
 gulp.task('lint', ['lintserver', 'lintclient']);
 gulp.task('buildCss', ['<%= cssPreprocessor %>', 'css', 'concatCss']);
 gulp.task('buildJs', ['uglify', 'concatJs']);
-gulp.task('default', ['lint', 'buildCss', 'buildJs', 'dev', 'watch']);
+gulp.task('default', ['lint', 'buildCss', 'buildJs', 'watch']);
