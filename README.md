@@ -48,8 +48,24 @@ appname - optional
 Now your app is ready to be run.
 
 ## Running
-Depending on the build tool you choose, you may have to run either
+Removed nodemon from the build task because the new version of nodemon eats up a lot of memory.
+Install version 0.7.10 of nodemon:
+```shell
+npm i -g nodemon@0.7.10
+```
 
+and to start the application run
+```shell
+nodemon -L --watch [folder] --watch [another folder] --debug app.js
+```
+For more information on using the version 0.7.10 of nodemon check it out over [here](https://github.com/remy/nodemon/tree/v0.7.10)
+
+If you are using gulp as your build tool, you will have to start the node inspector tool from another terminal by running
+```
+node-inspector --save-live-edit --web-port=[Number] --hidden=[Array]
+```
+
+Then in another terminal run
 ```shell
 grunt
 ```
@@ -58,6 +74,8 @@ or
 ```shell
 gulp
 ```
+to watch and build the application depending on the build tool you chose
+
 ## Contributing
 1. Fork it
 2. Create your feature branch ```git checkout -b feature-name```
