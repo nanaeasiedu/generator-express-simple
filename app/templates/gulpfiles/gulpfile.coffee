@@ -8,7 +8,6 @@ minifyCss = require 'gulp-minify-css'
 rename = require 'gulp-rename'
 concat =  require 'gulp-concat'
 livereload = require 'gulp-livereload'
-nodemon = require 'gulp-nodemon'
 
 # config to hold the path files
 paths =
