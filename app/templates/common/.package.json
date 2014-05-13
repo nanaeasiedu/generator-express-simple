@@ -17,7 +17,7 @@
   },
   "devDependencies": {<% if (buildToolLanguage === 'coffee') { %>
     "coffee-script": "~1.7.1",<% } if (buildTool === 'grunt') { %>
-    "grunt": "~0.4.4,
+    "grunt": "~0.4.4",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-concurrent": "~0.5.0",
