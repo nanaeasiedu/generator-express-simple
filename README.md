@@ -61,7 +61,7 @@ nodemon -L --watch [folder] --watch [another folder] --debug app.js
 For more information on using the version 0.7.10 of nodemon check it out over [here](https://github.com/remy/nodemon/tree/v0.7.10)
 
 If you are using gulp as your build tool, you will have to start the node inspector tool from another terminal by running
-```
+```shell
 node-inspector --save-live-edit --web-port=[Number] --hidden=[Array]
 ```
 
