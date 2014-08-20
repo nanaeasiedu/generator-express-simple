@@ -137,8 +137,6 @@ ExpressSimpleGenerator.prototype.projectfiles = function () {
   }, this);
 };
 
-// working on using either gulp or grunt as the development and build tool
-// there's a lot of work to be done
 ExpressSimpleGenerator.prototype.writeBuildFile = function () {
   var buildFile = (this.buildTool === 'grunt' ? 'Gruntfile.' : 'gulpfile.') + this.buildToolLanguage;
 
