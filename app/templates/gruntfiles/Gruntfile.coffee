@@ -16,9 +16,10 @@ module.exports = (grunt) ->
       options:
         mangle:
           except: ['jQuery']
-      target:
-        # add your js files over here to minify them into one javascript source file
-        'public/js/app.min.js': ['public/vendor/jquery/dist/jquery.min.js', 'public/vendor/bootstrap/dist/js/bootstrap.min.js', 'public/js/main.js']
+      dist:
+        files:
+          # add your js files over here to minify them into one javascript source file
+          'public/js/app.min.js': ['public/vendor/jquery/dist/jquery.min.js', 'public/vendor/bootstrap/dist/js/bootstrap.min.js', 'public/js/main.js']
     <%= cssPreprocessor %>:
       src:
         files: [{
@@ -44,10 +45,10 @@ module.exports = (grunt) ->
       all:
         files: ['public/**/*', 'views/**', '!**/node_modules/**', '!public/vendor/**/*', '!**/*.min.*']
         options:
-          livereload: true
+          livereload: 35729
       scripts:
-        files: 'public/js/**/*.js'
-        tasks: ['jshint:client', 'uglify']
+        files: ['public/js/**/*.js', '!**/*.min.*']
+        tasks: ['jshint:client', 'uglify:dist']
       server:
         files: '<%%= jshint.server %>'
         tasks: 'jshint:server'
@@ -65,4 +66,4 @@ module.exports = (grunt) ->
   # Load the tasks
 
   require('matchdep').filterDev('grunt-*').forEach @loadNpmTasks
-  @registerTask 'default', ['jshint', 'uglify', '<%= cssPreprocessor %>', 'cssmin', 'concat:css', 'concurrent']
+  @registerTask 'default', ['jshint', 'uglify:dist', '<%= cssPreprocessor %>', 'cssmin', 'concat:css', 'concurrent']
