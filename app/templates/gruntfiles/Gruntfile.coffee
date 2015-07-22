@@ -11,8 +11,7 @@ module.exports = (grunt) ->
         files:
           # add your css files over here to concatenate all css files
           # let's save our site users some bandwith
-          src: ['public/vendor/bootstrap/dist/css/bootstrap.min.css', 'public/css/styles.min.css']
-          dest: 'public/css/app.styles.min.css'
+          'public/css/app.styles.min.css': ['public/vendor/bootstrap/dist/css/bootstrap.min.css', 'public/css/styles.min.css']
     uglify:
       options:
         mangle:
