@@ -14,8 +14,7 @@ module.exports = function (grunt) {
         // add your css files over here to concatenate all css files
         // let's save our site users some bandwith
         files: {
-          src: ['public/vendor/bootstrap/dist/css/bootstrap.min.css', 'public/css/styles.min.css'],
-          dest: 'public/css/app.styles.min.css'
+          'public/css/app.styles.min.css': ['public/vendor/bootstrap/dist/css/bootstrap.min.css', 'public/css/styles.min.css']
         }
       }
     },
