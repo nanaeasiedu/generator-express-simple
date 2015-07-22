@@ -24,9 +24,11 @@ module.exports = function (grunt) {
           except: ['jQuery']
         }
       },
-      target: {
-        // add your js files over here to minify them into one javascript source file
-        'public/js/app.min.js': ['public/vendor/jquery/dist/jquery.min.js', 'public/vendor/bootstrap/dist/js/bootstrap.min.js', 'public/js/main.js']
+      dist: {
+        files: {
+          // add your js files over here to minify them into one javascript source file
+          'public/js/app.min.js': ['public/vendor/jquery/dist/jquery.min.js', 'public/vendor/bootstrap/dist/js/bootstrap.min.js', 'public/js/main.js']
+        }
       }
     },
     <%= cssPreprocessor %>: {
@@ -60,7 +62,7 @@ module.exports = function (grunt) {
       all: {
         files: ['public/**/*', 'views/**', '!**/node_modules/**', '!public/vendor/**/*', '!**/*.min.*'],
         options: {
-          livereload: 3006
+          livereload: 35729
         }
       },
       gruntfile: {
@@ -68,8 +70,8 @@ module.exports = function (grunt) {
         tasks: 'jshint:gruntfile'
       },
       scripts: {
-        files: 'public/js/**/*.js',
-        tasks: ['jshint:client', 'uglify']
+        files: ['public/js/**/*.js', '!**/*.min.*']
+        tasks: ['jshint:client', 'uglify:dist']
       },
       server: {
         files: '<%%= jshint.server %>',
@@ -92,5 +94,5 @@ module.exports = function (grunt) {
 
   // Load the tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-  grunt.registerTask('default', ['jshint', 'uglify', '<%= cssPreprocessor %>', 'cssmin', 'concat:css', 'concurrent']);
+  grunt.registerTask('default', ['jshint', 'uglify:dist', '<%= cssPreprocessor %>', 'cssmin', 'concat:css', 'concurrent']);
 };
