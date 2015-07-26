@@ -1,7 +1,8 @@
-var mongoose = require('mongoose');
+'use strict';
 
-var Schema = mongoose.Schema,
-    userSchema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var userSchema;
 
 userSchema = new Schema({
   email: String,

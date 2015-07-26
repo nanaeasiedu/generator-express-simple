@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * do something with the user model
  * var User = require('../models/user');
