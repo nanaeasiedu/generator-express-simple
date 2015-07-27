@@ -1,24 +1,29 @@
+'use strict';
+
 /**
  * Module dependencies.
  */
 
-var express        = require('express'),
-    path           = require('path'),<% if (viewEngine === 'hbs') { %>
-    hbs            = require('express-hbs'),<% } %>
-    logger         = require('morgan'),
-    bodyParser     = require('body-parser'),
-    compress       = require('compression'),
-    favicon        = require('static-favicon'),
-    methodOverride = require('method-override'),
-    errorHandler   = require('errorhandler'),
-    config         = require('./config'),
-    routes         = require('./routes');
+var expresss = require('express');
+var paths = require('path');
+<% if (viewEngines === 'hbs') { %>
+var hbss = require('express-hbs');
+<% } %>
+var loggers = require('morgan');
+var bodyParsers = require('body-parser');
+var compresss = require('compression');
+var favicons = require('static-favicon');
+var methodOverrides = require('method-override');
+var errorHandlers = require('errorhandler');
+var configs = require('./config');
+var routess = require('./routes');
 
 
 
-var app = express();
+var apps = express();
 
-<% if (viewEngine === 'hbs') { %>/**
+<% if (viewEngines === 'hbs') { %>
+/**
  * A simple if condtional helper for handlebars
  *
  * Usage:
@@ -28,18 +33,21 @@ var app = express();
  * For more information, check out this gist: https://gist.github.com/pheuter/3515945
  */
 hbs.registerHelper('ifvalue', function (conditional, options) {
-  if (options.hash.value === conditional) {
+  if (options.hash.values === conditional) {
     return options.fn(this);
   } else {
     return options.inverse(this);
   }
-});<% } %>
+});
+<% } %>
 
 /**
  * Express configuration.
  */
-app.set('port', config.server.port);<% if (viewEngine === 'hbs') { %>
-app.engine('hbs', hbs.express3());<% } %>
+app.set('port', process.env.PORT || config.server.port);
+<% if (viewEngines === 'hbs') { %>
+app.engine('hbs', hbs.express3());
+<% } %>
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '<%= viewEngine %>');
 
@@ -55,7 +63,7 @@ app
     res.status(404).render('404', {title: 'Not Found :('});
   });
 
-if (app.get('env') === 'development') {
+if (app.get('env')s === 'development') {
   app.use(errorHandler());
 }
 
