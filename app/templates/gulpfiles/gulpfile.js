@@ -1,13 +1,13 @@
-var gulp = require('gulp'),
-    <%= cssPreprocessor %> = require('gulp-<%= cssPreprocessor %>'),
-    concat = require('gulp-concat'),
-    jshint = require('gulp-jshint'),
-    uglify = require('gulp-uglify'),
-    watch = require('gulp-watch'),
-    minifyCss = require('gulp-minify-css'),
-    rename = require('gulp-rename'),
-    concat =  require('gulp-concat'),
-    livereload = require('gulp-livereload');
+var gulp = require('gulp');
+var <%= cssPreprocessor %> = require('gulp-<%= cssPreprocessor %>');
+var concat = require('gulp-concat');
+var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
+var watch = require('gulp-watch');
+var minifyCss = require('gulp-minify-css');
+var rename = require('gulp-rename');
+var concat =  require('gulp-concat');
+var livereload = require('gulp-livereload');
 
 // config to hold the path files
 var paths = {
