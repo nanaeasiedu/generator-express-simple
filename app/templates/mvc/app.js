@@ -2,18 +2,21 @@
  * Module dependencies.
  */
 
-var express  = require('express'),
-    path     = require('path'),
-    mongoose = require('mongoose'),<% if (viewEngine === 'hbs') { %>
-    hbs      = require('express-hbs'),<% } %>
-    config   = require('./config'),
-    routes   = require('./routes');
+var express  = require('express');
+var path     = require('path');
+var mongoose = require('mongoose');<% if (viewEngine === 'hbs') { %>
+var hbs      = require('express-hbs');<% } %>
+var config   = require('./config');
+var routes   = require('./routes');
 
 
-mongoose.connect(config.database.url);
-mongoose.connection.on('error', function () {
-  console.log('mongodb connection error');
-});
+mongoose
+  .connect(config.database.url);
+
+mongoose
+  .connection.on('error', function () {
+    console.log('mongodb connection error');
+  });
 
 var app = express();
 
@@ -26,34 +29,36 @@ var app = express();
  *   {{/ifvalue}}
  * For more information, check out this gist: https://gist.github.com/pheuter/3515945
  */
-hbs.registerHelper('ifvalue', function (conditional, options) {
-  if (options.hash.value === conditional) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});<% } %>
+hbs
+  .registerHelper('ifvalue', function (conditional, options) {
+    if (options.hash.value === conditional) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  });<% } %>
 
 /**
  * Express configuration.
  */
-app.set('port', config.server.port);<% if (viewEngine === 'hbs') { %>
-app.engine('hbs', hbs.express3());<% } %>
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', '<%= viewEngine %>');
-app.use(express.compress());
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.cookieParser());
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(express.session({ secret: 'your secret code' }));
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(function (req, res) {
-  res.status(404).render('404', {title: 'Not Found :('});
-});
+app
+  .set('port', config.server.port)<% if (viewEngine === 'hbs') { %>
+  .engine('hbs', hbs.express3())<% } %>
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', '<%= viewEngine %>')
+  .use(express.compress())
+  .use(express.favicon())
+  .use(express.logger('dev'))
+  .use(express.cookieParser())
+  .use(express.json())
+  .use(express.urlencoded())
+  .use(express.methodOverride())
+  .use(express.session({ secret: 'your secret code' }))
+  .use(app.router)
+  .use(express.static(path.join(__dirname, 'public')))
+  .use(function (req, res) {
+    res.status(404).render('404', {title: 'Not Found :('});
+  });
 
 if (app.get('env') === 'development') {
   app.use(express.errorHandler());
