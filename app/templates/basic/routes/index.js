@@ -1,7 +1,8 @@
 module.exports = function (app) {
-  app.get('/', function (req, res) {
-    res.render('index', {
-      title: '<%= _.slugify(appname) %>'
+  app
+    .get('/', function (req, res) {
+      res.render('index', {
+        title: '<%= _.slugify(appname) %>'
+      });
     });
-  });
 };

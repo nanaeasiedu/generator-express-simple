@@ -2,24 +2,27 @@
  * Module dependencies.
  */
 
-var express        = require('express'),
-    path           = require('path'),
-    mongoose       = require('mongoose'),<% if (viewEngine === 'hbs') { %>
-    hbs            = require('express-hbs'),<% } %>
-    logger         = require('morgan'),
-    bodyParser     = require('body-parser'),
-    compress       = require('compression'),
-    favicon        = require('static-favicon'),
-    methodOverride = require('method-override'),
-    errorHandler   = require('errorhandler'),
-    config         = require('./config'),
-    routes         = require('./routes');
+var express = require('express');
+var path = require('path');
+var mongoose = require('mongoose');<% if (viewEngine === 'hbs') { %>
+var hbs = require('express-hbs');<% } %>
+var logger = require('morgan');
+var bodyParser = require('body-parser');
+var compress = require('compression');
+var favicon = require('static-favicon');
+var methodOverride = require('method-override');
+var errorHandler = require('errorhandler');
+var config = require('./config');
+var routes = require('./routes');
 
 
-mongoose.connect(config.database.url);
-mongoose.connection.on('error', function () {
-  console.log('mongodb connection error');
-});
+mongoose
+  .connect(config.database.url);
+
+mongoose
+  .connection.on('error', function () {
+    console.log('mongodb connection error');
+  });
 
 var app = express();
 
@@ -32,21 +35,23 @@ var app = express();
  *   {{/ifvalue}}
  * For more information, check out this gist: https://gist.github.com/pheuter/3515945
  */
-hbs.registerHelper('ifvalue', function (conditional, options) {
-  if (options.hash.value === conditional) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});<% } %>
+hbs
+  .registerHelper('ifvalue', function (conditional, options) {
+    if (options.hash.value === conditional) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  });<% } %>
 
 /**
  * Express configuration.
  */
-app.set('port', config.server.port);<% if (viewEngine === 'hbs') { %>
-app.engine('hbs', hbs.express3());<% } %>
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', '<%= viewEngine %>');
+app
+  .set('port', config.server.port)<% if (viewEngine === 'hbs') { %>
+  .engine('hbs', hbs.express3())<% } %>
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', '<%= viewEngine %>');
 
 app
   .use(compress())
@@ -64,6 +69,7 @@ if (app.get('env') === 'development') {
   app.use(errorHandler());
 }
 
-app.listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + app.get('port'));
-});
+app
+  .listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
+  });
