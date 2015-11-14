@@ -88,3 +88,7 @@ to watch and build the application depending on the build tool you chose
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/darlanmendonca/generator-express-simple/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
